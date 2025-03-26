@@ -1,0 +1,22 @@
+<section class="d-flex justify-content-center mt-3">
+    <div class="card shadow p-3 text-center">
+        <div class="row justify-content-center">
+            <figure class="col-12 d-flex justify-content-center align-items-start">
+                <img [src]="miEmp.imagen" class="rounded-circle" [alt]="miEmp.nombre" width="200" height="200">
+            </figure>
+            <div class="col-12">
+                <h2>{{miEmp.nombre}} {{miEmp.apellidos}}</h2>
+                <hr>
+                <p><strong>Email:</strong> {{miEmp.email}}</p>
+                <p><strong>Domicilio:</strong> {{miEmp.domicilio}}</p>
+                <p><strong>Fecha de nacimiento:</strong> {{miEmp.fechaNacimiento}}</p> 
+                <p><strong>Fecha de Ingreso:</strong> {{miEmp.fechaIngreso}}</p>  
+                <p><strong>Situación administrativa:</strong> {{miEmp.situacion}}</p>
+                <p><strong>Estado:</strong> {{miEmp.estado}}</p>              
+                <div class="d-flex justify-content-center">
+                    <app-botonera [parent]="'view'" [idEmp]="miEmp.idEmp"></app-botonera>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

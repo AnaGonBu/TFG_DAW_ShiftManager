@@ -1,0 +1,23 @@
+<div class="d-flex gap-2 justify-content-center">
+    @if(parent == 'card'){
+        <div class="d-flex gap-4">
+            <div class="text-center">
+              <i [routerLink]="['/empleado', idEmp]" class="bi bi-search pointer"></i>
+              <div class="small-text">Detalle</div>
+            </div>    
+            <div class="text-center">
+              <i [routerLink]="['/actualizar','empleado', idEmp]" class="bi bi-arrow-clockwise pointer"></i>
+              <div class="small-text">Actualizar</div>
+            </div>
+            <div class="text-center">
+              <i class="bi bi-trash pointer" (click)="borrarEmpleado(idEmp)"></i>
+              <div class="small-text">Borrar</div>
+            </div>
+          </div>
+    }
+    @else if(parent == 'view'){
+    <a [routerLink]="['/empleados']" class="btn btn-dark"> Volver</a>
+    <a [routerLink]="['/actualizar','empleado', idEmp]" class="btn btn-dark">Actualizar</a>
+    <button class="btn btn-dark" (click)="borrarEmpleado(idEmp)">Borrar</button>
+    }
+</div>
