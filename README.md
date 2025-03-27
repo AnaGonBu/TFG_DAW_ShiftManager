@@ -7,8 +7,4 @@ constantes y donde los empleados realizan cambios de turnos entre sí.
 Un calendario interactivo donde se visualiza qué empleados trabajan cada día y con distintas 
 funcionalidades que puedan agilizar procesos administrativos del trabajo.  
 Se añaden funciones extra para contabilizar horas, ver hojas de empleado, modificar turnos, etc. Aplicando normativa vigente  
-<<<<<<< HEAD
 Roles de user y admin. 
-=======
-Roles de user y admin. 
->>>>>>> 5ca7093519133151a66f03f008b3493c747d1836
