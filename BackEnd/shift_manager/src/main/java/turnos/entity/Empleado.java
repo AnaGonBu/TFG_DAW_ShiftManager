@@ -22,6 +22,9 @@ public class Empleado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_emp")
     private Integer idEmp;
+    
+  /*  @Enumerated(EnumType.STRING)
+    private Role rol;*/
 
     private String nombre;
 

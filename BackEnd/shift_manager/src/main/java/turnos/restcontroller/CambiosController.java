@@ -52,5 +52,6 @@ public class CambiosController {
     public ResponseEntity<Void> deleteCambio(@PathVariable Integer id) {
         cambioService.deleteCambio(id);
         return ResponseEntity.noContent().build();
+       // return new ResponseEntity<>( HttpStatus.NO_CONTENT);
     }
 }
