@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { EmpleadoService } from '../../services/empleado.service';
-import { Empleado } from '../../interfaces/empleado';
 import Swal from 'sweetalert2';
-import { CommonModule } from '@angular/common';
+import { Empleado } from '../../interfaces/empleado';
+import { EmpleadoService } from '../../services/empleado.service';
+import { validarEdadMinima } from '../../validators/edad-minima.validator';
 
 @Component({
   selector: 'app-emp-form',
@@ -35,7 +36,7 @@ export class EmpFormComponent {
       situacion: new FormControl('', [Validators.required]),
       estado: new FormControl('', [Validators.required]),
       grupo: new FormControl('', [Validators.required])
-    }, []);
+    }, { validators: [validarEdadMinima()] });
   }
 
 
@@ -57,7 +58,7 @@ export class EmpFormComponent {
           situacion: new FormControl(empResponse.situacion, [Validators.required]),
           estado: new FormControl(empResponse.estado, [Validators.required]),
           grupo: new FormControl(empResponse.grupo.idGrupo, [Validators.required])
-        }, []);
+        }, { validators: [validarEdadMinima()] }); 
       }
     });
 }

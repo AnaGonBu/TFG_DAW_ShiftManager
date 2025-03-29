@@ -1,0 +1,78 @@
+<section>
+    <form class="card shadow p-4" [formGroup]="cambioForm" (ngSubmit)="getDataForm()">
+        
+        <!-- FILA PARA LAS DOS COLUMNAS -->
+        <div class="row g-4">
+            
+            <!-- COLUMNA IZQUIERDA (EMPLEADO SOLICITANTE) -->
+            <div class="col-md-6">
+                <h3 class="text-center mb-4">Empleado solicitante</h3>
+                
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Mínimo dos letras">
+                </div>
+
+                <div class="mb-3">
+                    <label for="last_name" class="form-label">Apellidos</label>
+                    <input type="text" id="last_name" class="form-control" formControlName="apellidos" placeholder="Mínimo dos letras">
+                </div>
+
+                <div class="mb-3">
+                    <label for="grupo" class="form-label">Grupo de pertenencia</label>
+                    <select id="grupo" class="form-select" formControlName="grupo">
+                        <option value="1">Grupo 1</option>
+                        <option value="2">Grupo 2</option>
+                        <option value="3">Grupo 3</option>
+                        <option value="4">Grupo 4</option>
+                        <option value="5">Grupo 5</option>
+                        <option value="6">Grupo 6</option>
+                        <option value="7">Grupo 7</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="fechaCambio2" class="form-label">Fecha de cambio</label>
+                    <input type="date" id="fechaCambio2" class="form-control" formControlName="fechaCambio2">
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA (EMPLEADO CAMBIO) -->
+            <div class="col-md-6">
+                <h3 class="text-center mb-4">Empleado cambio</h3>
+                
+                <div class="mb-3">
+                    <label for="nombre2" class="form-label">Nombre</label>
+                    <input type="text" id="nombre2" class="form-control" formControlName="nombre2" placeholder="Mínimo dos letras">
+                </div>
+
+                <div class="mb-3">
+                    <label for="last_name2" class="form-label">Apellidos</label>
+                    <input type="text" id="last_name2" class="form-control" formControlName="apellidos2" placeholder="Mínimo dos letras">
+                </div>
+
+                <div class="mb-3">
+                    <label for="grupo2" class="form-label">Grupo de pertenencia</label>
+                    <select id="grupo2" class="form-select" formControlName="grupo2">
+                        <option value="1">Grupo 1</option>
+                        <option value="2">Grupo 2</option>
+                        <option value="3">Grupo 3</option>
+                        <option value="4">Grupo 4</option>
+                        <option value="5">Grupo 5</option>
+                        <option value="6">Grupo 6</option>
+                        <option value="7">Grupo 7</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="fechaCambio" class="form-label">Fecha de cambio</label>
+                    <input type="date" id="fechaCambio" class="form-control" formControlName="fechaCambio">
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="d-flex gap-2 mt-4 justify-content-center">
+            <input type="submit" value="Guardar" class="btn btn-dark" [disabled]="!cambioForm.valid">
+            <a [routerLink]="['/empleados']" class="btn btn-dark">Volver</a>
+        </div>
+    </form>
+</section>

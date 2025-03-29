@@ -12,7 +12,7 @@
                 <p><strong>Fecha de nacimiento:</strong> {{miEmp.fechaNacimiento}}</p> 
                 <p><strong>Fecha de Ingreso:</strong> {{miEmp.fechaIngreso}}</p>  
                 <p><strong>Situación administrativa:</strong> {{miEmp.situacion}}</p>
-                <p><strong>Estado:</strong> {{miEmp.estado}}</p>              
+                <p><strong>Estado:</strong>  {{ miEmp.estado ? 'Activo' : 'Inactivo' }}</p>              
                 <div class="d-flex justify-content-center">
                     <app-botonera [parent]="'view'" [idEmp]="miEmp.idEmp"></app-botonera>
                 </div>
