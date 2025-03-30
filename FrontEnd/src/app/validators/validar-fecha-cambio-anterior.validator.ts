@@ -1,20 +1,28 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export function validarFechaCambioAnterior(): ValidatorFn {
+export function validarFechasCambio(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
+    const fechaSolicitud = control.get('fechaSolicitud')?.value;
     const fechaCambio = control.get('fechaCambio')?.value;
     const fechaCambio2 = control.get('fechaCambio2')?.value;
 
-    if (!fechaCambio || !fechaCambio2) {
-      return null; // Wait until both fields are filled
+    if (!fechaSolicitud || !fechaCambio || !fechaCambio2) {
+      return null; // No validar hasta que estén todas las fechas
     }
 
-    // Convert both dates to Date objects for comparison
+    const fechaSol = new Date(fechaSolicitud);
     const fecha1 = new Date(fechaCambio);
     const fecha2 = new Date(fechaCambio2);
 
-    // Check if fechaCambio is before fechaCambio2
-    return fecha1 < fecha2 ? null : { fechaCambioInvalida: true };  // Return error if fechaCambio is not before fechaCambio2
+    let errors: ValidationErrors = {};
+
+    if (fecha1 <= fechaSol) {
+      errors['fechaCambioInvalida'] = true;
+    }
+    if (fecha2 <= fechaSol) {
+      errors['fechaCambio2Invalida'] = true;
+    }
+
+    return Object.keys(errors).length ? errors : null;
   };
 }
-

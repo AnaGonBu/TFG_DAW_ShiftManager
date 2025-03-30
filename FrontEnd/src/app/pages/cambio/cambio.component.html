@@ -11,11 +11,17 @@
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Mínimo dos letras">
+                    <p *ngIf="cambioForm.controls['nombre'].touched && cambioForm.controls['nombre'].invalid" class="text-danger">
+                    El nombre es obligatorio y debe tener al menos 2 letras.
+                    </p>
                 </div>
 
                 <div class="mb-3">
                     <label for="last_name" class="form-label">Apellidos</label>
                     <input type="text" id="last_name" class="form-control" formControlName="apellidos" placeholder="Mínimo dos letras">
+                    <p *ngIf="cambioForm.controls['apellidos'].touched && cambioForm.controls['apellidos'].invalid" class="text-danger">
+                    Los apellidos son obligatorios y deben tener al menos 2 letras.
+                    </p>
                 </div>
 
                 <div class="mb-3">
@@ -30,9 +36,13 @@
                         <option value="7">Grupo 7</option>
                     </select>
                 </div>
+
                 <div class="mb-3">
                     <label for="fechaCambio2" class="form-label">Fecha de cambio</label>
                     <input type="date" id="fechaCambio2" class="form-control" formControlName="fechaCambio2">
+                    <p *ngIf="cambioForm.controls['fechaCambio2'].touched && cambioForm.errors?.['fechaCambioInvalida']" class="text-danger">
+                    La fecha debe ser posterior a la fecha de solicitud.
+                    </p>
                 </div>
             </div>
 
@@ -43,11 +53,17 @@
                 <div class="mb-3">
                     <label for="nombre2" class="form-label">Nombre</label>
                     <input type="text" id="nombre2" class="form-control" formControlName="nombre2" placeholder="Mínimo dos letras">
+                    <p *ngIf="cambioForm.controls['nombre2'].touched && cambioForm.controls['nombre2'].invalid" class="text-danger">
+                    El nombre es obligatorio y debe tener al menos 2 letras.
+                    </p>
                 </div>
 
                 <div class="mb-3">
                     <label for="last_name2" class="form-label">Apellidos</label>
                     <input type="text" id="last_name2" class="form-control" formControlName="apellidos2" placeholder="Mínimo dos letras">
+                    <p *ngIf="cambioForm.controls['apellidos2'].touched && cambioForm.controls['apellidos2'].invalid" class="text-danger">
+                    Los apellidos son obligatorios y deben tener al menos 2 letras.
+                    </p>
                 </div>
 
                 <div class="mb-3">
@@ -62,15 +78,24 @@
                         <option value="7">Grupo 7</option>
                     </select>
                 </div>
+
                 <div class="mb-3">
                     <label for="fechaCambio" class="form-label">Fecha de cambio</label>
                     <input type="date" id="fechaCambio" class="form-control" formControlName="fechaCambio">
+                    <p *ngIf="cambioForm.controls['fechaCambio'].touched && cambioForm.errors?.['fechaCambioInvalida']" class="text-danger">
+                    La fecha debe ser posterior a la fecha de solicitud.
+                    </p>
                 </div>
             </div>
         </div>
 
-        
-        <div class="d-flex gap-2 mt-4 justify-content-center">
+        <!-- FECHA SOLICITUD CENTRADA -->
+        <div class="mb-3 text-center">
+            <label for="fechaSolicitud" class="m-2 fw-bold">Fecha de Solicitud:</label>
+            <input id="fechaSolicitud" class="form-control text-center w-50 mx-auto" formControlName="fechaSolicitud" type="date" readonly>
+        </div> 
+
+        <div class="d-flex gap-2 mt-1 justify-content-center">
             <input type="submit" value="Guardar" class="btn btn-dark" [disabled]="!cambioForm.valid">
             <a [routerLink]="['/empleados']" class="btn btn-dark">Volver</a>
         </div>
