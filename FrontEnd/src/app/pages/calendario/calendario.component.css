@@ -67,3 +67,15 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
   
+
+
+  .grupo-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12px;
+    width: 100%;
+  }

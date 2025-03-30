@@ -5,6 +5,7 @@ import { CambioComponent } from './pages/cambio/cambio.component';
 import { EmpFormComponent } from './pages/emp-form/emp-form.component';
 import { EmpListComponent } from './pages/emp-list/emp-list.component';
 import { EmpViewComponent } from './pages/emp-view/emp-view.component';
+import { ConfigTurnosComponent } from './pages/config-turnos/config-turnos.component';
 
 export const routes: Routes = [
     { path: "", pathMatch: "full", redirectTo: "empleados"},
@@ -15,6 +16,7 @@ export const routes: Routes = [
     { path: 'calendario', component: CalendarioComponent },
     { path: 'cambio', component: CambioComponent},
     { path: 'cambio/gestion', component: CambioGestionComponent},
+    { path: 'turnos', component: ConfigTurnosComponent},
     { path: "**", redirectTo: "empleados"}
 ];
 

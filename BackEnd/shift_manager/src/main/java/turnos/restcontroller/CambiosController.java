@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/cambios")
+@RequestMapping("/cambios")
+@CrossOrigin(origins = "*") 
 public class CambiosController {
 
     @Autowired
