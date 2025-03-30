@@ -1,6 +1,9 @@
 <section>
     <h3 class="d-flex justify-content-center">{{tipo}} empleado</h3>
     <form class="card shadow p-4" [formGroup]="empForm" (ngSubmit)="getDataForm()">
+        <!-- FILA PARA LAS DOS COLUMNAS -->
+        <div class="row g-4">
+        <div class="col-md-6">
         <div class="mt-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Mínimo dos letras">
@@ -25,7 +28,8 @@
             <label for="domicilio" class="form-label">Domicilio</label>
             <input type="text" id="domicilio" class="form-control" formControlName="domicilio" placeholder="Calle, población, código postal...">
         </div>
-
+        </div>
+        <div class="col-md-6">
         <div class="mt-3">
             <label for="fechaIngreso" class="form-label">Fecha de ingreso</label>
             <input type="date" id="fechaIngreso" class="form-control" formControlName="fechaIngreso">
@@ -49,7 +53,7 @@
               </div>
         </div>
 
-        <div class="mt-3">
+        <div class="mt-4">
             <label for="estado" class="form-label">Estado</label>
             <div class="form-check">
                 <input type="checkbox" id="estado" class="form-check-input" formControlName="estado" checked>
@@ -57,7 +61,7 @@
             </div>
         </div>
 
-        <div class="mt-3">
+        <div class="mt-4">
             <label for="grupo" class="form-label">Grupo de pertenencia</label>
             <select id="grupo" class="form-control" formControlName="grupo">
                 <option value="1">Grupo 1</option>
@@ -69,7 +73,8 @@
                 <option value="7">Grupo 7</option>
             </select>
         </div>
-
+        </div>
+        </div>
         <div class="d-flex gap-2 mt-4 justify-content-center">
             <input type="submit" value="Guardar" class="btn btn-dark" [disabled]="!empForm.valid">
             <a [routerLink]="['/empleados']" class="btn btn-dark">Volver</a>
