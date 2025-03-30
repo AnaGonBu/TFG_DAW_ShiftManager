@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { CalendarioComponent } from './pages/calendario/calendario.component';
+import { CambioGestionComponent } from './pages/cambio-gestion/cambio-gestion.component';
 import { CambioComponent } from './pages/cambio/cambio.component';
 import { EmpFormComponent } from './pages/emp-form/emp-form.component';
 import { EmpListComponent } from './pages/emp-list/emp-list.component';
@@ -13,6 +14,7 @@ export const routes: Routes = [
     { path: "actualizar/empleado/:idEmp", component: EmpFormComponent},
     { path: 'calendario', component: CalendarioComponent },
     { path: 'cambio', component: CambioComponent},
-    {path: "**", redirectTo: "empleados"}
+    { path: 'cambio/gestion', component: CambioGestionComponent},
+    { path: "**", redirectTo: "empleados"}
 ];
 
