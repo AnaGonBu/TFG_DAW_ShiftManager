@@ -55,13 +55,14 @@ export class EmpleadoService {
     return lastValueFrom(this.httpClient.post<Empleado>(this.baseUrl, empleado));
   }
 
- /**  update(idEmp: number, empleado: Empleado): Promise<Empleado> {
-    return lastValueFrom(this.httpClient.put<Empleado>(this.baseUrl + "/" +empleado.idEmp, empleado));
-  }*/
-
   update(idEmp: number, empleado: Empleado): Promise<Empleado> {
     console.log(empleado);
     return lastValueFrom(this.httpClient.put<Empleado>(`${this.baseUrl}/${idEmp}`, empleado));
+  }
+
+  //para sacar empleados de cada grupo, implementado en el back, aun no en el front
+  getByGrupo(idGrupo: number): Promise<Empleado[]> {
+    return lastValueFrom(this.httpClient.get<Empleado[]>(`${this.baseUrl}/grupo/${idGrupo}`));
   }
 
 

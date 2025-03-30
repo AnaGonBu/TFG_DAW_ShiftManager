@@ -10,4 +10,5 @@ public interface EmpleadoService {
     Optional<Empleado> buscarPorId(Integer id);
     Empleado guardar(Empleado empleado);
     void eliminar(Integer id);
+    List<Empleado> findByGrupoId(Integer idGrupo);
 }

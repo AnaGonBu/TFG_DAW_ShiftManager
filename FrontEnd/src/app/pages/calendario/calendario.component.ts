@@ -6,6 +6,8 @@ import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { ConfigTurnosComponent } from '../config-turnos/config-turnos.component';
 import { TurnosService } from '../../services/turnos.service';
+import { EmpleadoService } from '../../services/empleado.service';
+import { Empleado } from '../../interfaces/empleado';
 
 @Component({
   selector: 'app-root',
@@ -22,10 +24,12 @@ export class CalendarioComponent implements OnInit {
     plugins: [dayGridPlugin],
     firstDay: 1,
     events: []
-  };
+    };
 
   turnosService = inject(TurnosService);
+  empleadoService = inject(EmpleadoService);
 
+  
   constructor() {}
 
   ngOnInit() {
@@ -55,4 +59,6 @@ export class CalendarioComponent implements OnInit {
 
     return eventos;
   }
+
+
 }

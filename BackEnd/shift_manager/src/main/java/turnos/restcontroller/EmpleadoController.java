@@ -1,9 +1,11 @@
 package turnos.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import turnos.entity.Empleado;
+import turnos.repository.EmpleadoRepository;
 import turnos.service.EmpleadoService;
 
 import java.util.List;
@@ -58,4 +60,10 @@ public class EmpleadoController {
     public void eliminarEmpleado(@PathVariable Integer id) {
         empleadoService.eliminar(id);
     }
+    
+    @GetMapping("/grupo/{idGrupo}")
+    public List<Empleado> listarPorGrupo(@PathVariable Integer idGrupo) {
+        return empleadoService.findByGrupoId(idGrupo);
+    }
+    
 }

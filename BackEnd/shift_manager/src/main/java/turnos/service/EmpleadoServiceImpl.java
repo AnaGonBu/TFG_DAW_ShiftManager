@@ -34,4 +34,10 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public void eliminar(Integer id) {
         empleadoRepository.deleteById(id);
     }
+    
+    @Override
+    public List<Empleado> findByGrupoId(Integer idGrupo) {
+        return empleadoRepository.findByGrupo_IdGrupo(idGrupo);
+    }
+
 }
