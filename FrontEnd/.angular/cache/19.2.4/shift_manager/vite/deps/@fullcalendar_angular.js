@@ -7,10 +7,6 @@ import {
   NgTemplateOutlet
 } from "./chunk-RLI5KEP3.js";
 import {
-  Calendar,
-  CustomRenderingStore
-} from "./chunk-JKG7XCCY.js";
-import {
   ChangeDetectorRef,
   Component,
   ContentChild,
@@ -42,6 +38,10 @@ import {
   ɵɵviewQuery
 } from "./chunk-N2APCJKI.js";
 import "./chunk-P6U2JBMQ.js";
+import {
+  Calendar,
+  CustomRenderingStore
+} from "./chunk-JKG7XCCY.js";
 import {
   __spreadValues
 } from "./chunk-WDMUDEB6.js";
