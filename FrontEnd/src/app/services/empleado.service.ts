@@ -65,6 +65,11 @@ export class EmpleadoService {
     return lastValueFrom(this.httpClient.get<Empleado[]>(`${this.baseUrl}/grupo/${idGrupo}`));
   }
 
+  //para modificar el estado del empleado
+  updateEstado(idEmp: number): Promise<Empleado> {
+    return lastValueFrom(this.httpClient.put<Empleado>(`${this.baseUrl}/${idEmp}/estado`, {}));
+  }
+
 
 
 }

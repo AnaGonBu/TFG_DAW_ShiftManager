@@ -14,7 +14,7 @@
                 <p><strong>Situación administrativa:</strong> {{miEmp.situacion}}</p>
                 <p><strong>Estado:</strong>  {{ miEmp.estado ? 'Activo' : 'Inactivo' }}</p>              
                 <div class="d-flex justify-content-center">
-                    <app-botonera [parent]="'view'" [idEmp]="miEmp.idEmp"></app-botonera>
+                    <app-botonera [parent]="'view'" [idEmp]="miEmp.idEmp" [estado]="miEmp.estado"></app-botonera>
                 </div>
             </div>
         </div>

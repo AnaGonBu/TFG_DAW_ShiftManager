@@ -6,3 +6,8 @@
   .pointer {
     cursor: pointer;
   }
+
+
+  input[type="checkbox"] {
+    accent-color: #343a40; /* Color dark */
+  }
