@@ -36,7 +36,7 @@ export class BotoneraComponent {
       if (response.idEmp) {
         Swal.fire({
           icon: 'success',
-          title: `Empleado ${response.nombre} borrado correctamente`,
+          title: `Empleado con ID: ${response.idEmp} borrado correctamente`,
           showConfirmButton: true,
           timer: 3000
         });
