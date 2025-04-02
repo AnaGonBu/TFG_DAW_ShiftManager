@@ -8,7 +8,9 @@ import turnos.entity.Empleado;
 import turnos.repository.EmpleadoRepository;
 import turnos.service.EmpleadoService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -56,14 +58,35 @@ public class EmpleadoController {
         }
     }
 
+    /** metodo de borrar sin devolver nada
     @DeleteMapping("{id}")
     public void eliminarEmpleado(@PathVariable Integer id) {
         empleadoService.eliminar(id);
+    }*/
+    
+    //Así devuelve el id del empleado eliminado para usarlo en el front
+    @DeleteMapping("{id}")
+    public ResponseEntity<Map<String, Integer>> eliminarEmpleado(@PathVariable Integer id) {
+        empleadoService.eliminar(id);
+        Map<String, Integer> response = new HashMap<>();
+        response.put("idEmp", id);
+        return ResponseEntity.ok(response);
     }
     
     @GetMapping("/grupo/{idGrupo}")
     public List<Empleado> listarPorGrupo(@PathVariable Integer idGrupo) {
         return empleadoService.findByGrupoId(idGrupo);
     }
+    
+    @PutMapping("{id}/estado")
+    public ResponseEntity<Empleado> actualizarEstado(@PathVariable Integer id) {
+        Optional<Empleado> empleadoOpt = empleadoService.buscarPorId(id);
+
+        Empleado empleado = empleadoOpt.get();
+        empleado.setEstado(!empleado.getEstado());
+        empleadoService.guardar(empleado);
+        return ResponseEntity.ok(empleado);
+    }
+    
     
 }

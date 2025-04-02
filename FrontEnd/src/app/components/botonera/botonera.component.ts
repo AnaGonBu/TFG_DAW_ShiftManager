@@ -17,8 +17,40 @@ export class BotoneraComponent {
 
   @Input() idEmp: number = 0;
   @Input() parent: string = "";
+  @Input() estado!: boolean;
 
 
+  async cambiarEstado() {
+    if (this.estado) {
+      const { isConfirmed } = await Swal.fire({
+        title: '¿Está seguro de desactivar este empleado?',
+        text: 'El empleado desaparecerá del calendario de turnos.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, desactivar',
+        cancelButtonText: 'Cancelar',
+      });
+      if (!isConfirmed) return;
+    }
+
+    let empleadoActualizado = await this.empService.updateEstado(this.idEmp);
+    this.estado = empleadoActualizado.estado;
+
+    Swal.fire({
+      icon: 'success',
+      title: `Estado actualizado: ${this.estado ? 'Activo' : 'Inactivo'}`,
+      showConfirmButton: true,
+      timer: 2000
+    }).then(() => {
+      setTimeout(() => {
+        location.reload();
+      }, 0,500);
+    });
+
+  }
+  
+
+  //mejor no borrar empleados, y solo dejarlos inactivos
   async borrarEmpleado(idEmp: number) {
 
     const { isConfirmed } = await Swal.fire({
@@ -36,7 +68,7 @@ export class BotoneraComponent {
       if (response.idEmp) {
         Swal.fire({
           icon: 'success',
-          title: `Empleado ${response.nombre} borrado correctamente`,
+          title: `Empleado con ID: ${response.idEmp} borrado correctamente`,
           showConfirmButton: true,
           timer: 3000
         });
