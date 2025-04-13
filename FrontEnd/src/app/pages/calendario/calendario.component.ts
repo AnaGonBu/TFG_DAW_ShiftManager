@@ -23,32 +23,32 @@ export class CalendarioComponent implements OnInit {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin],
     firstDay: 1,
-    events: []
-    };
+    events: [],
+    eventContent: this.cargarEmpleados.bind(this)
+  };
 
   turnosService = inject(TurnosService);
   empleadoService = inject(EmpleadoService);
-
   
   constructor() {}
 
   ngOnInit() {
     this.turnosService.turnos$.subscribe(turnos => {
-      this.actualizarEventos(turnos);
+      this.actualizarGrupos(turnos);
     });
   }
 
-  actualizarEventos(turnos: any[]) {
-    const eventos = turnos.flatMap(turno => this.generarEventos(turno));
+  actualizarGrupos(turnos: any[]) {
+    const eventos = turnos.flatMap(turno => this.cargarGrupos(turno));
     this.calendarOptions = { ...this.calendarOptions, events: eventos };
   }
 
-  generarEventos(turno: any) {
+  cargarGrupos(turno: any) { 
     const eventos = [];
     let fecha = new Date(turno.fechaInicio);
     const hoy = new Date();
 
-    while (fecha <= new Date(hoy.getFullYear(), hoy.getMonth() + 12, 0)) { //definimos hasta cuando se repite en meses (actual 12)
+    while (fecha <= new Date(hoy.getFullYear(), hoy.getMonth() + 6, 0)) { //definimos hasta cuando se repite en meses (actual 6 meses)
       eventos.push({
         title: `Grupo ${turno.idGrupo}`,
         start: fecha.toISOString().split('T')[0]
@@ -60,5 +60,45 @@ export class CalendarioComponent implements OnInit {
     return eventos;
   }
 
+
+
+
+  cargarEmpleados(arg: any) {
+    const idGrupo = arg.event.title.replace('Grupo ', '');
+    const collapseId = `collapseGrupo${idGrupo}${arg.event.startStr.replaceAll('-', '')}`;
+  
+    const container = document.createElement('div');
+    container.innerHTML = `
+      <button 
+        class="grupo-button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#${collapseId}">
+        ${arg.event.title}
+      </button>
+  
+      <div class="collapse mt-1" id="${collapseId}">
+        <div class="card card-body p-1 text-start" style="font-size: 12px; background-color: #f8f9fa; color: #212529; border: 1px solid #6c757d;">
+          <div id="empleados-${idGrupo}">Cargando...</div>
+        </div>
+      </div>
+    `;
+  
+    this.empleadoService.getByGrupo(+idGrupo).then(empleados => {
+      const contenedor = document.getElementById(`empleados-${idGrupo}`);
+      if (contenedor) {
+        contenedor.innerHTML = empleados.length > 0
+          ? empleados.map(e => `<div>• ${e.nombre} ${e.apellidos}</div>`).join('')
+          : '<div class="text-muted">No hay empleados asignados</div>';
+      }
+    }).catch(() => {
+      const contenedor = document.getElementById(`empleados-${idGrupo}`);
+      if (contenedor) {
+        contenedor.innerHTML = '<div class="text-danger">Error al cargar empleados</div>';
+      }
+    });
+  
+    return { domNodes: [container] };
+  }
+  
 
 }

@@ -4,6 +4,7 @@ import { Grupo } from '../../interfaces/grupo';
 import { GrupoService } from '../../services/grupo.service';
 import { CommonModule } from '@angular/common';
 import { TurnosService } from '../../services/turnos.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-config-turnos',
@@ -28,14 +29,25 @@ export class ConfigTurnosComponent implements OnInit {
   }
 
   initForm() {
-    const formControls = this.grupos.reduce((acc, grupo) => {
+    //precarga de fechas en el form de inicio de los turnos, para no ponerlas cada vez para probar 
+    const fechasInicio = [
+      '2025-04-07', 
+      '2025-04-08', 
+      '2025-04-09', 
+      '2025-04-10', 
+      '2025-04-11', 
+      '2025-04-12', 
+      '2025-04-13'  
+    ];
+  
+    const formControls = this.grupos.reduce((acc, grupo, index) => {
       acc[grupo.idGrupo] = this.fb.group({
-        fechaInicio: ['', Validators.required],   
+        fechaInicio: [fechasInicio[index] || '', Validators.required], 
         frecuenciaDias: [7, [Validators.required, Validators.min(1)]]
       });
       return acc;
     }, {} as any);
-
+  
     this.turnosForm = this.fb.group(formControls);
   }
 
@@ -46,7 +58,12 @@ export class ConfigTurnosComponent implements OnInit {
       frecuenciaDias: this.turnosForm.value[idGrupo].frecuenciaDias
     }));
 
-    console.log('Turnos guardados:', turnos);
     this.turnosService.actualizarTurnos(turnos); 
+    Swal.fire({
+      icon: 'success',
+      title: 'Turnos guardados',
+      text: 'Los turnos se han actualizado correctamente.',
+    });
   }
+
 }
