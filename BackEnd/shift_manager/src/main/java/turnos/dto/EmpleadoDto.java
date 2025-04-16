@@ -30,8 +30,13 @@ public class EmpleadoDto {
     
     private static final ModelMapper modelMapper = new ModelMapper();
 
+
     public static EmpleadoDto mapFromEntity(Empleado empleado) {
-        return modelMapper.map(empleado, EmpleadoDto.class);
+        EmpleadoDto dto = modelMapper.map(empleado, EmpleadoDto.class);
+        if (empleado.getGrupo() != null) {
+            dto.setIdGrupo(empleado.getGrupo().getIdGrupo());
+        }
+        return dto;
     }
 
     public static Empleado mapToEntity(EmpleadoDto dto) {

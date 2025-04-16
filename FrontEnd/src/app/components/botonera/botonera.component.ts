@@ -1,7 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
-import { EmpleadoService } from '../../services/empleado.service';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
+import { EmpleadoService } from '../../services/empleado.service';
 
 
 @Component({
@@ -50,39 +50,39 @@ export class BotoneraComponent {
   }
   
 
-  //mejor no borrar empleados, y solo dejarlos inactivos
-  async borrarEmpleado(idEmp: number) {
+  // //mejor no borrar empleados, y solo dejarlos inactivos
+  // async borrarEmpleado(idEmp: number) {
 
-    const { isConfirmed } = await Swal.fire({
-      title: '¿Está seguro de que quiere eliminar este empleado?',
-      text: 'Esta acción no se puede deshacer.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar',
-    });
+  //   const { isConfirmed } = await Swal.fire({
+  //     title: '¿Está seguro de que quiere eliminar este empleado?',
+  //     text: 'Esta acción no se puede deshacer.',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Sí, eliminar',
+  //     cancelButtonText: 'Cancelar',
+  //   });
   
-    if (isConfirmed) {
-      let response = await this.empService.delete(idEmp);
+  //   if (isConfirmed) {
+  //     let response = await this.empService.delete(idEmp);
   
-      if (response.idEmp) {
-        Swal.fire({
-          icon: 'success',
-          title: `Empleado con ID: ${response.idEmp} borrado correctamente`,
-          showConfirmButton: true,
-          timer: 3000
-        });
-        if (this.parent == 'view') {
-            this.router.navigate(['/empleados']);
-        } else if (this.parent == "card") {
-          setTimeout(() => {
-            location.reload();
-          }, 3000);
-        }
-      }
+  //     if (response.idEmp) {
+  //       Swal.fire({
+  //         icon: 'success',
+  //         title: `Empleado con ID: ${response.idEmp} borrado correctamente`,
+  //         showConfirmButton: true,
+  //         timer: 3000
+  //       });
+  //       if (this.parent == 'view') {
+  //           this.router.navigate(['/empleados']);
+  //       } else if (this.parent == "card") {
+  //         setTimeout(() => {
+  //           location.reload();
+  //         }, 3000);
+  //       }
+  //     }
 
-    }
+  //   }
 
-  }
+  // }
 
 }

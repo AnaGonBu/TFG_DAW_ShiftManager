@@ -57,7 +57,7 @@ export class EmpFormComponent {
           fechaNacimiento: new FormControl(empResponse.fechaNacimiento, [Validators.required]),
           situacion: new FormControl(empResponse.situacion, [Validators.required]),
           estado: new FormControl(empResponse.estado, [Validators.required]),
-          grupo: new FormControl(empResponse.grupo.idGrupo, [Validators.required])
+          grupo: new FormControl(empResponse.idGrupo, [Validators.required])
         }, { validators: [validarEdadMinima()] }); 
       }
     });

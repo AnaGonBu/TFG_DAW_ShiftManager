@@ -11,7 +11,7 @@
           <select class="form-select" id="solicitante" formControlName="solicitante">
             <option value="" disabled>Seleccione un empleado</option>
             <option *ngFor="let emp of arrEmpleados" [value]="emp.idEmp">
-              {{ emp.nombre }} {{ emp.apellidos }} (Grupo: {{ emp.grupo.idGrupo || 'N/A' }})
+              {{ emp.nombre }} {{ emp.apellidos }} (Grupo: {{ emp.idGrupo || 'N/A' }})
             </option>
           </select>
         </div>
@@ -33,7 +33,7 @@
           <select class="form-select" id="concede" formControlName="concede">
             <option value="" disabled>Seleccione un empleado</option>
             <option *ngFor="let emp of arrEmpleados" [value]="emp.idEmp">
-              {{ emp.nombre }} {{ emp.apellidos }} (Grupo: {{ emp.grupo.idGrupo || 'N/A' }})
+              {{ emp.nombre }} {{ emp.apellidos }} (Grupo: {{ emp.idGrupo || 'N/A' }})
             </option>
           </select>
         </div>

@@ -3,6 +3,7 @@ package turnos.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import turnos.entity.Empleado;
 import turnos.repository.EmpleadoRepository;
 
@@ -16,6 +17,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     private EmpleadoRepository empleadoRepository;
 
     @Override
+    @Transactional
     public List<Empleado> listarTodos() {
         return empleadoRepository.findAll();
     }

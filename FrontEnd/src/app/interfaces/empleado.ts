@@ -1,4 +1,3 @@
-import { Grupo } from "./grupo"
 
 export interface Empleado {
   idEmp: number,
@@ -11,6 +10,6 @@ export interface Empleado {
   fechaNacimiento: Date,
   situacion: string,
   estado: boolean,
-  grupo: Grupo
-  //grupo: number
+  //grupo: Grupo
+  idGrupo: number
 }

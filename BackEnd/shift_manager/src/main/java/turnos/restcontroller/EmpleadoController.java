@@ -1,17 +1,19 @@
 package turnos.restcontroller;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import turnos.dto.EmpleadoDto;
 import turnos.entity.Empleado;
-import turnos.repository.EmpleadoRepository;
 import turnos.service.EmpleadoService;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/empleados")
@@ -21,9 +23,16 @@ public class EmpleadoController {
     @Autowired
     private EmpleadoService empleadoService;
 
-    @GetMapping
-    public List<Empleado> listarEmpleados() {
-        return empleadoService.listarTodos();
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @GetMapping("")
+    public List<EmpleadoDto> listarTodos() {
+        List<Empleado> empleados = empleadoService.listarTodos();
+        // Convertimos la lista de entidades a una lista de DTOs
+        return empleados.stream()
+                        .map(empleado -> modelMapper.map(empleado, EmpleadoDto.class))
+                        .collect(Collectors.toList());
     }
 
     @GetMapping("{id}")

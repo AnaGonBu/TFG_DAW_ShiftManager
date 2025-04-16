@@ -10,7 +10,7 @@
           <h2 class="text-center my-4">Grupo {{ grupoId }}</h2>
           <div class="row justify-content-center gx-2 gy-3">
             @for (empleado of arrEmpleados; track empleado.idEmp) {
-              @if (empleado.grupo.idGrupo === grupoId) {
+              @if (empleado.idGrupo === grupoId) {
                 <article class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center" style="max-width: 200px;">
                   <app-emp-card [miEmp]="empleado"></app-emp-card>
                 </article>

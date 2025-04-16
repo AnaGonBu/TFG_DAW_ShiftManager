@@ -18,7 +18,7 @@ import turnos.entity.Empleado;
 public class SpingConfig {
 
     @Bean
-    public ModelMapper modelMapper() {
+    ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
 
         // Mapeo de CambioGrupo a CambioGrupoDto con solo los IDs de las entidades relacionadas
