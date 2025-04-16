@@ -1,3 +1,4 @@
+drop database shiftmanagerbbdd;
 create database shiftmanagerbbdd;
 use shiftmanagerbbdd;
 
@@ -33,8 +34,22 @@ id_concede int,
 fecha_solicitud date,
 fecha_turno1 date,
 fecha_turno2 date,
+estado varchar (10) not null default 'pendiente',
 foreign key(id_solicitante) references empleados(id_emp)
 );
+CREATE TABLE cambios_grupo (
+    id_cambio_grupo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_cambio INT NOT NULL,
+    id_empleado INT NOT NULL,
+    fecha DATE NOT NULL,
+    id_grupo_origen INT,
+    id_grupo_destino INT,
+    FOREIGN KEY(id_cambio) REFERENCES cambios(id_cambio),
+    FOREIGN KEY(id_empleado) REFERENCES empleados(id_emp),
+    FOREIGN KEY(id_grupo_origen) REFERENCES grupos(id_grupo),
+    FOREIGN KEY(id_grupo_destino) REFERENCES grupos(id_grupo)
+);
+
 
 
 select * from cambios;
