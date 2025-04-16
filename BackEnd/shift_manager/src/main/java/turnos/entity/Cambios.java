@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import java.time.LocalDate;
 
 @Entity
@@ -35,4 +36,7 @@ public class Cambios {
 
     @Column(name = "fecha_turno2")
     private LocalDate fechaTurno2;
+    
+	@Enumerated(EnumType.STRING)
+	private Estado estado;
 }
