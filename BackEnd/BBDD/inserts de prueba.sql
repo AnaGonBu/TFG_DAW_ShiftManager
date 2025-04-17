@@ -1,11 +1,11 @@
-INSERT INTO grupos (id_grupo, nombre_grupo, num_emp, descripcion, estado) VALUES
-(1, 'Grupo 1', 4, 'Grupo 1 de turnos de seguridad', 1),
-(2, 'Grupo 2', 4, 'Grupo 2 de turnos de seguridad', 1),
-(3, 'Grupo 3', 4, 'Grupo 3 de turnos de seguridad', 1),
-(4, 'Grupo 4', 4, 'Grupo 4 de turnos de seguridad', 1),
-(5, 'Grupo 5', 4, 'Grupo 5 de turnos de seguridad', 1),
-(6, 'Grupo 6', 4, 'Grupo 6 de turnos de seguridad', 1),
-(7, 'Grupo 7', 4, 'Grupo 7 de turnos de seguridad', 1);
+INSERT INTO grupos (id_grupo, nombre_grupo, num_emp, descripcion, estado,fecha_inicio,frecuencia) VALUES
+(1, 'Grupo 1', 4, 'Grupo 1 de turnos de seguridad', 1,'2024-03-22',7),
+(2, 'Grupo 2', 4, 'Grupo 2 de turnos de seguridad', 1,'2024-03-23',7),
+(3, 'Grupo 3', 4, 'Grupo 3 de turnos de seguridad', 1,'2024-03-24',7),
+(4, 'Grupo 4', 4, 'Grupo 4 de turnos de seguridad', 1,'2024-03-25',7),
+(5, 'Grupo 5', 4, 'Grupo 5 de turnos de seguridad', 1,'2024-03-26',7),
+(6, 'Grupo 6', 4, 'Grupo 6 de turnos de seguridad', 1,'2024-03-27',7),
+(7, 'Grupo 7', 4, 'Grupo 7 de turnos de seguridad', 1,'2024-03-28',7);
 
 
 INSERT INTO empleados (nombre, apellidos, email, url_imagen, domicilio, fecha_ingreso, fecha_nacimiento, situacion, estado, id_grupo) VALUES

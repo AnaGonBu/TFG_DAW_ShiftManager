@@ -7,7 +7,9 @@ create table grupos
 nombre_grupo varchar(45),
 num_emp int,
 descripcion varchar(100),
-estado boolean
+estado boolean,
+fecha_inicio date not null,
+frecuencia int not null
 );
 
 

@@ -1,9 +1,12 @@
 package turnos.dto;
 
 
+import java.sql.Date;
+
 import org.modelmapper.ModelMapper;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,6 +35,12 @@ public class GrupoDto {
 	
 	@Schema(description = "Estado del turno", example = "1")
     private Boolean estado;
+	
+	@Schema(description = "Fecha inicio del turno", example = "1990-05-20")
+    private Date fechaInicio;
+    
+	@Schema(description = "Frecuencia en dias repeticion turno", example = "7")
+    private Integer frecuencia;
     
     private static final ModelMapper modelMapper = new ModelMapper();
 

@@ -99,8 +99,6 @@ public class EmpleadoController {
                     content = @Content(schema = @Schema(implementation = EmpleadoDto.class))),
             @ApiResponse(responseCode = "404", description = "Empleado no encontrado")
         })
-    
-    
         @PutMapping("{id}")
         public ResponseEntity<EmpleadoDto> actualizarEmpleado(
             @Parameter(description = "ID del empleado a actualizar") @PathVariable Integer id,

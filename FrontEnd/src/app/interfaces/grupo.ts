@@ -3,5 +3,7 @@ export interface Grupo {
     nombreGrupo: string,
     numEmp: number,
     descripcion: string,
-    estado: boolean
+    estado: boolean,
+    fechaInicio: Date,
+    frecuencia : number
 }

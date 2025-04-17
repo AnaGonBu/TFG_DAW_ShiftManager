@@ -1,5 +1,7 @@
 package turnos.entity;
 
+import java.sql.Date;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,4 +31,9 @@ public class Grupo {
     private String descripcion;
 
     private Boolean estado;
+    
+    @Column(name = "fecha_inicio")
+    private Date fechaInicio;
+    
+    private Integer frecuencia;
 }
