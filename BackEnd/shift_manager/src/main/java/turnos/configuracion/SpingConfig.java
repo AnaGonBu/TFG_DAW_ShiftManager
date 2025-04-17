@@ -37,10 +37,13 @@ public class SpingConfig {
             mapper.map(Empleado::getIdEmp, EmpleadoDto::setIdEmp);
             mapper.map(Empleado::getNombre, EmpleadoDto::setNombre);
             mapper.map(Empleado::getApellidos, EmpleadoDto::setApellidos);
-            // ... mapea otros campos simples si es necesario
+            mapper.map(Empleado::getSituacion, EmpleadoDto::setSituacion);
+            mapper.map(Empleado::getEstado, EmpleadoDto::setEstado);
+            
+            
         });
 
-        // Mapeo de Cambios a CambioDto con solo los IDs de las entidades relacionadas
+        // Mapeo de Cambios a CambiosDto con solo los IDs de las entidades relacionadas
         TypeMap<Cambios, CambiosDto> cambioMap = modelMapper.createTypeMap(Cambios.class, CambiosDto.class);
         cambioMap.addMappings(mapper -> {
             mapper.map(Cambios::getIdCambio, CambiosDto::setIdCambio);

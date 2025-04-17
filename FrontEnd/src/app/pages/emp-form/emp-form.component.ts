@@ -35,7 +35,7 @@ export class EmpFormComponent {
       fechaNacimiento: new FormControl('', [Validators.required]),
       situacion: new FormControl('', [Validators.required]),
       estado: new FormControl('', [Validators.required]),
-      grupo: new FormControl('', [Validators.required])
+      idGrupo: new FormControl('', [Validators.required])
     }, { validators: [validarEdadMinima()] });
   }
 
@@ -57,7 +57,7 @@ export class EmpFormComponent {
           fechaNacimiento: new FormControl(empResponse.fechaNacimiento, [Validators.required]),
           situacion: new FormControl(empResponse.situacion, [Validators.required]),
           estado: new FormControl(empResponse.estado, [Validators.required]),
-          grupo: new FormControl(empResponse.idGrupo, [Validators.required])
+          idGrupo: new FormControl(empResponse.idGrupo, [Validators.required])
         }, { validators: [validarEdadMinima()] }); 
       }
     });
@@ -66,13 +66,9 @@ export class EmpFormComponent {
 getDataForm() {
   if (this.empForm.invalid) return;
 
-  const formValues = this.empForm.value;
-  const datosEmp: Empleado = {
-    ...formValues,
-    grupo: {
-      idGrupo: formValues.grupo
-    }
-  };
+  const datosEmp = this.empForm.value;
+
+  
 
   if (datosEmp.idEmp) {
     this.empService.update(datosEmp.idEmp, datosEmp)

@@ -48,7 +48,7 @@
                 <option value="baja_administrativa">Baja Administrativa</option>
                 <option value="licencia">Licencia</option>
             </select>
-            <div *ngIf="empForm.get('grupo')?.invalid && empForm.get('grupo')?.touched" class="text-danger">
+            <div *ngIf="empForm.get('idGrupo')?.invalid && empForm.get('idGrupo')?.touched" class="text-danger">
                 Debes seleccionar un grupo.
               </div>
         </div>
@@ -62,8 +62,8 @@
         </div>
 
         <div class="mt-4">
-            <label for="grupo" class="form-label">Grupo de pertenencia</label>
-            <select id="grupo" class="form-control" formControlName="grupo">
+            <label for="idGrupo" class="form-label">Grupo de pertenencia</label>
+            <select id="idGrupo" class="form-control" formControlName="idGrupo">
                 <option value="1">Grupo 1</option>
                 <option value="2">Grupo 2</option>
                 <option value="3">Grupo 3</option>

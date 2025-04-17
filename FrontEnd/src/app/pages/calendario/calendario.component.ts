@@ -1,13 +1,10 @@
-import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions, EventInput } from '@fullcalendar/core'; 
+import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { ConfigTurnosComponent } from '../config-turnos/config-turnos.component';
-import { TurnosService } from '../../services/turnos.service';
 import { EmpleadoService } from '../../services/empleado.service';
-import { Empleado } from '../../interfaces/empleado';
+import { TurnosService } from '../../services/turnos.service';
 
 @Component({
   selector: 'app-root',
@@ -64,7 +61,7 @@ export class CalendarioComponent implements OnInit {
 
 
   cargarEmpleados(arg: any) {
-    const idGrupo = arg.event.title.replace('Grupo ', '');
+    const idGrupo = arg.event.title.replace('idGrupo ', '');
     const collapseId = `collapseGrupo${idGrupo}${arg.event.startStr.replaceAll('-', '')}`;
   
     const container = document.createElement('div');

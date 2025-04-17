@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { validarFechasCambio } from '../../validators/validar-fecha-cambio-anterior.validator';
-import { EmpleadoService } from '../../services/empleado.service';
-import { Empleado } from '../../interfaces/empleado';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Empleado } from '../../interfaces/empleado';
+import { EmpleadoService } from '../../services/empleado.service';
+import { validarFechasCambio } from '../../validators/validar-fecha-cambio-anterior.validator';
 
 @Component({
   selector: 'app-cambio',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './cambio.component.html',
   styleUrls: ['./cambio.component.css']
 })
