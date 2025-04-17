@@ -1,10 +1,12 @@
 package turnos.configuracion;
 
 
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 
 import turnos.dto.CambioGrupoDto;
 import turnos.dto.CambiosDto;
@@ -43,15 +45,25 @@ public class SpingConfig {
             
         });
 
-        // Mapeo de Cambios a CambiosDto con solo los IDs de las entidades relacionadas
-        TypeMap<Cambios, CambiosDto> cambioMap = modelMapper.createTypeMap(Cambios.class, CambiosDto.class);
-        cambioMap.addMappings(mapper -> {
-            mapper.map(Cambios::getIdCambio, CambiosDto::setIdCambio);
-            mapper.map(Cambios::getFechaSolicitud, CambiosDto::setFechaSolicitud);
-            mapper.map(Cambios::getFechaTurno1, CambiosDto::setFechaTurno1);
-            mapper.map(Cambios::getFechaTurno2, CambiosDto::setFechaTurno2);
-            mapper.map(src -> src.getSolicitante() != null ? src.getSolicitante().getIdEmp() : null, CambiosDto::setIdSolicitante);
-            mapper.map(src -> src.getIdConcede() != null ? src.getIdConcede() : null, CambiosDto::setIdConcede);
+        // --- DTO -> ENTIDAD: CambiosDto → Cambios
+        Converter<Integer, Empleado> idToEmpleadoConverter = ctx -> {
+            Integer id = ctx.getSource();
+            return id != null ? Empleado.builder().idEmp(id).build() : null;
+        };
+
+        TypeMap<CambiosDto, Cambios> dtoToEntity = modelMapper.createTypeMap(CambiosDto.class, Cambios.class);
+        dtoToEntity.addMappings(mapper -> {
+            mapper.using(idToEmpleadoConverter).map(CambiosDto::getIdSolicitante, Cambios::setIdSolicitante);
+            mapper.using(idToEmpleadoConverter).map(CambiosDto::getIdConcede, Cambios::setIdConcede);
+        });
+
+        // --- ENTIDAD -> DTO: Cambios → CambiosDto
+        TypeMap<Cambios, CambiosDto> entityToDto = modelMapper.createTypeMap(Cambios.class, CambiosDto.class);
+        entityToDto.addMappings(mapper -> {
+            mapper.map(src -> src.getIdSolicitante() != null ? src.getIdSolicitante().getIdEmp() : null,
+                       CambiosDto::setIdSolicitante);
+            mapper.map(src -> src.getIdConcede() != null ? src.getIdConcede().getIdEmp() : null,
+                       CambiosDto::setIdConcede);
         });
 
         return modelMapper;

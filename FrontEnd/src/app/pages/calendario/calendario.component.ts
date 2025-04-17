@@ -3,8 +3,8 @@ import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { CambiosService } from '../../services/cambios.service';
 import { EmpleadoService } from '../../services/empleado.service';
-import { TurnosService } from '../../services/turnos.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,7 @@ export class CalendarioComponent implements OnInit {
     eventContent: this.cargarEmpleados.bind(this)
   };
 
-  turnosService = inject(TurnosService);
+  turnosService = inject(CambiosService);
   empleadoService = inject(EmpleadoService);
   
   constructor() {}

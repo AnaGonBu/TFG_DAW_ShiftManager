@@ -1,10 +1,10 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Grupo } from '../../interfaces/grupo';
-import { GrupoService } from '../../services/grupo.service';
 import { CommonModule } from '@angular/common';
-import { TurnosService } from '../../services/turnos.service';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Grupo } from '../../interfaces/grupo';
+import { CambiosService } from '../../services/cambios.service';
+import { GrupoService } from '../../services/grupo.service';
 
 @Component({
   selector: 'app-config-turnos',
@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export class ConfigTurnosComponent implements OnInit {
   turnosForm!: FormGroup;
   grupos: Grupo[] = [];
-  turnosService = inject(TurnosService);
+  cambioService = inject(CambiosService);
 
   @Output() turnosActualizados = new EventEmitter<any[]>(); 
 
@@ -58,7 +58,7 @@ export class ConfigTurnosComponent implements OnInit {
       frecuenciaDias: this.turnosForm.value[idGrupo].frecuenciaDias
     }));
 
-    this.turnosService.actualizarTurnos(turnos); 
+    this.cambioService.actualizarTurnos(turnos); 
     Swal.fire({
       icon: 'success',
       title: 'Turnos guardados',

@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import turnos.dto.EmpleadoDto;
 import turnos.dto.GrupoDto;
 import turnos.entity.Empleado;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/grupos")
 @CrossOrigin(origins = "*") 
+@Tag(name="Grupos", description ="Operaciones de grupos")
 public class GrupoController {
 
     @Autowired

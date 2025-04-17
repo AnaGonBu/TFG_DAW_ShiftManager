@@ -3,7 +3,9 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Cambio } from '../../interfaces/cambio';
 import { Empleado } from '../../interfaces/empleado';
+import { CambiosService } from '../../services/cambios.service';
 import { EmpleadoService } from '../../services/empleado.service';
 import { validarFechasCambio } from '../../validators/validar-fecha-cambio-anterior.validator';
 
@@ -21,7 +23,8 @@ export class CambioComponent {
 
 
   arrEmpleados: Empleado[] = []
-  empService = inject(EmpleadoService);  
+  empService = inject(EmpleadoService);
+  cambioService = inject(CambiosService)  
     
 
   constructor() {
@@ -42,24 +45,26 @@ export class CambioComponent {
 
     this.cambioForm = new FormGroup({
       fechaSolicitud: new FormControl(fechaActual, [Validators.required]),
-      solicitante: new FormControl('', [Validators.required]),
+      idSolicitante: new FormControl('', [Validators.required]),
       fechaCambio: new FormControl('', [Validators.required]),
-      concede: new FormControl('', [Validators.required]),
+      idConcede: new FormControl('', [Validators.required]),
       fechaCambio2: new FormControl('', [Validators.required])
     }, { validators: [validarFechasCambio()] });
 
   }
 
-  getDataForm() {
+async  getDataForm() {
     if (this.cambioForm.invalid) return;
   
-    const formData = {
-      idConcede: this.cambioForm.value.concede,
-      solicitante: { id_emp: this.cambioForm.value.solicitante },
+    const formData : Cambio = {
+      idConcede: this.cambioForm.value.idConcede,
+      idSolicitante:  this.cambioForm.value.idSolicitante ,
       fechaSolicitud: this.cambioForm.value.fechaSolicitud,
       fechaTurno1: this.cambioForm.value.fechaCambio,
       fechaTurno2: this.cambioForm.value.fechaCambio2
     };
+  try{
+    const respuesta = await this.cambioService.insertCambio(formData);
   
     console.log('DTO para enviar:', formData);
   
@@ -71,8 +76,16 @@ export class CambioComponent {
     }).then(() => {
       this.router.navigate(['/calendario']);
     });
+  }catch (error) {
+    console.error('Error al guardar el cambio:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'No se pudo registrar el cambio de turno',
+      confirmButtonText: 'Cerrar'
+    });
   }
-
+}
 
   async ngOnInit(): Promise<void> {
     try {

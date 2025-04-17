@@ -1,10 +1,10 @@
-import { Empleado } from "./empleado"
 
 export interface Cambio {
-  idCambio: number,
-  solicitante: Empleado,
+  idCambio?: number,
+  idSolicitante: number,
   idConcede: number,
   fechaSolicitud: Date,
   fechaTurno1: Date,
-  fechaTurno2: Date
+  fechaTurno2: Date,
+  estado?: string 
 }

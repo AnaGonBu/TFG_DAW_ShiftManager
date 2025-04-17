@@ -38,6 +38,8 @@ public class CambiosDto {
 	
 	@Schema(description = "Estado solicitud", example = "PENDIENTE")
     private String estado;
+	
+	
     
     private static final ModelMapper modelMapper = new ModelMapper();
 

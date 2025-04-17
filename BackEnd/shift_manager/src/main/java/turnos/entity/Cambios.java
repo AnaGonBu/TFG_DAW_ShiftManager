@@ -23,10 +23,12 @@ public class Cambios {
     private Integer idCambio;
 
     @ManyToOne
-    @JoinColumn(name = "id_solicitante", referencedColumnName = "id_emp")
-    private Empleado solicitante;  // Relación con la entidad Empleado
+    @JoinColumn(name = "id_solicitante",nullable = false,referencedColumnName = "id_emp")
+    private Empleado idSolicitante;  // Relación con la entidad Empleado
 
-    private Integer idConcede;
+    @ManyToOne
+    @JoinColumn(name = "id_concede", nullable = false, referencedColumnName = "id_emp")
+    private Empleado idConcede;
     
     @Column(name = "fecha_solicitud")
     private LocalDate fechaSolicitud;
