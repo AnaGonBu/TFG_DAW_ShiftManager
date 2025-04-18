@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -17,9 +17,14 @@ import java.time.LocalDate;
 @EqualsAndHashCode(of = "idCambio")
 @NoArgsConstructor
 @Builder
-public class Cambios {
+public class Cambios implements Serializable{
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cambio")
     private Integer idCambio;

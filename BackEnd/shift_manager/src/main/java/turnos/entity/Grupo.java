@@ -1,5 +1,6 @@
 package turnos.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import jakarta.persistence.*;
@@ -16,9 +17,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "grupos")
 @Data
-public class Grupo {
+public class Grupo implements Serializable{
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @Column(name = "id_grupo")
     private Integer idGrupo;
 

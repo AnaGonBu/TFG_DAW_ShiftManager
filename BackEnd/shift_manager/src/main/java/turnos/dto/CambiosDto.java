@@ -1,4 +1,5 @@
 package turnos.dto;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import org.modelmapper.ModelMapper;
@@ -16,7 +17,12 @@ import turnos.entity.Cambios;
 @AllArgsConstructor
 @Builder
 @Schema(description = "DTO que representa solicitudes de cambios")
-public class CambiosDto {
+public class CambiosDto implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "ID de cambio", example = "1")
 	private Integer idCambio;

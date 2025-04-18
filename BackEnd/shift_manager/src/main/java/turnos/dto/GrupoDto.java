@@ -1,6 +1,7 @@
 package turnos.dto;
 
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import org.modelmapper.ModelMapper;
@@ -18,7 +19,12 @@ import turnos.entity.Grupo;
 @AllArgsConstructor
 @Builder
 @Schema(description = "DTO que representa un turno")
-public class GrupoDto {
+public class GrupoDto implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "ID del turno", example = "1")
     private Integer idGrupo;
