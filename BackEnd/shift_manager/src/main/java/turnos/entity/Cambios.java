@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Table(name = "cambios")
 @Data
 @AllArgsConstructor
+@EqualsAndHashCode(of = "idCambio")
 @NoArgsConstructor
 @Builder
 public class Cambios {
@@ -41,4 +43,6 @@ public class Cambios {
     
 	@Enumerated(EnumType.STRING)
 	private Estado estado;
+	
+	
 }

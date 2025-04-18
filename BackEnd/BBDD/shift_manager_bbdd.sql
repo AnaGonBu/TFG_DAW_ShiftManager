@@ -32,11 +32,11 @@ foreign key(id_grupo) references grupos(id_grupo)
 create table cambios 
 (id_cambio int not null auto_increment primary key,
 id_solicitante int not null,
-id_concede int,
+id_concede int not null,
 fecha_solicitud date,
 fecha_turno1 date,
 fecha_turno2 date,
-estado varchar (10) not null default 'pendiente',
+estado varchar (10) not null default 'PENDIENTE',
 foreign key(id_solicitante) references empleados(id_emp),
 foreign key(id_concede) references empleados(id_emp)
 );

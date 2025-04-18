@@ -6,7 +6,6 @@ import java.sql.Date;
 import org.modelmapper.ModelMapper;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

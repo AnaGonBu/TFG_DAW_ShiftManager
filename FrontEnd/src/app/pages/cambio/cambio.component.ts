@@ -61,7 +61,7 @@ async  getDataForm() {
       idSolicitante:  this.cambioForm.value.idSolicitante ,
       fechaSolicitud: this.cambioForm.value.fechaSolicitud,
       fechaTurno1: this.cambioForm.value.fechaCambio,
-      fechaTurno2: this.cambioForm.value.fechaCambio2
+      fechaTurno2: this.cambioForm.value.fechaCambio2 
     };
   try{
     const respuesta = await this.cambioService.insertCambio(formData);

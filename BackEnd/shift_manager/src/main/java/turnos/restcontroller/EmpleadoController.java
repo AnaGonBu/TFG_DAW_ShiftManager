@@ -155,30 +155,31 @@ public class EmpleadoController {
     @Operation(summary = "Listar empleados por ID de grupo", responses = {
             @ApiResponse(responseCode = "200", description = "Listado por grupo",
                 content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Empleado.class))),
+                    schema = @Schema(implementation = EmpleadoDto.class))),
             @ApiResponse(responseCode = "404", description = "No se encontraron empleados en ese grupo")
         })
-        @GetMapping("/grupo/{idGrupo}")
-        public List<Empleado> listarPorGrupo(
-                @Parameter(description = "ID del grupo") @PathVariable Integer idGrupo) {
-            return empleadoService.findByGrupoId(idGrupo);
-        }
+    @GetMapping("/grupo/{idGrupo}")
+    public List<EmpleadoDto> listarPorGrupo(@Parameter(description = " ID del grupo")@PathVariable Integer idGrupo) {
+        return empleadoService.findByGrupoId(idGrupo).stream()
+            .map(e -> modelMapper.map(e, EmpleadoDto.class))
+            .toList();
+    }
     
     @Operation(summary = "Actualizar estado del empleado (activo/inactivo)", responses = {
             @ApiResponse(responseCode = "200", description = "Estado actualizado",
                 content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Empleado.class))),
+                    schema = @Schema(implementation = EmpleadoDto.class))),
             @ApiResponse(responseCode = "404", description = "Empleado no encontrado")
         })
-        @PutMapping("{id}/estado")
-        public ResponseEntity<Empleado> actualizarEstado(
-                @Parameter(description = "ID del empleado") @PathVariable Integer id) {
-            Optional<Empleado> empleadoOpt = empleadoService.buscarPorId(id);
-            Empleado empleado = empleadoOpt.get();
-            empleado.setEstado(!empleado.getEstado());
-            empleadoService.guardar(empleado);
-            return ResponseEntity.ok(empleado);
-        }
-    
+    @PutMapping("{id}/estado")
+    public ResponseEntity<EmpleadoDto> actualizarEstado(@Parameter(description = "ID del empleado")@PathVariable Integer id) {
+        Optional<Empleado> empleadoOpt = empleadoService.buscarPorId(id);
+        Empleado empleado = empleadoOpt.get();
+        empleado.setEstado(!empleado.getEstado());
+        empleadoService.guardar(empleado);
+
+        EmpleadoDto dto = modelMapper.map(empleado, EmpleadoDto.class);
+        return ResponseEntity.ok(dto);
+    }
     
 }
