@@ -6,4 +6,5 @@ import turnos.entity.Cambios;
 
 @Repository
 public interface CambiosRepository extends JpaRepository<Cambios, Integer> {
+	
 }

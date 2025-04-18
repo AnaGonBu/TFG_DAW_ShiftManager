@@ -1,11 +1,15 @@
 package turnos.restcontroller;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +28,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import turnos.dto.EmpleadoDto;
 import turnos.dto.GrupoDto;
+import turnos.entity.Empleado;
 import turnos.entity.Grupo;
 import turnos.service.GrupoService;
 
@@ -35,6 +42,7 @@ public class GrupoController {
 
     @Autowired
     private GrupoService grupoService;
+
     
     @Autowired
     private ModelMapper modelMapper;
@@ -126,6 +134,35 @@ public class GrupoController {
     	        return ResponseEntity.badRequest().build();
     	    }
     	}
+    
+    @Operation(
+    	    summary = "Obtener todos los grupos con los empleados asignados en una fecha determinada",
+    	    description = "Incluye los cambios temporales aceptados, según la tabla CambioGrupo"
+    	)
+    	@ApiResponse(
+    	    responseCode = "200",
+    	    description = "Mapa de grupos con sus empleados en la fecha",
+    	    content = @Content(schema = @Schema(implementation = EmpleadoDto.class))
+    	)
+    	@GetMapping("/calendario/grupos-dia")
+    	public ResponseEntity<Map<Integer, List<EmpleadoDto>>> getGruposParaFecha(
+    	    @Parameter(description = "Fecha a consultar (formato yyyy-MM-dd)", example = "2025-04-22")
+    	    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha
+    	) {
+    	    Map<Grupo, List<Empleado>> gruposConMiembros = grupoService.getGruposConMiembrosParaFecha(fecha);
+
+    	    Map<Integer, List<EmpleadoDto>> respuesta = new HashMap<>();
+    	    for (Map.Entry<Grupo, List<Empleado>> entry : gruposConMiembros.entrySet()) {
+    	        Integer idGrupo = entry.getKey().getIdGrupo();
+    	        List<EmpleadoDto> miembros = entry.getValue().stream()
+    	        		.map(emp -> modelMapper.map(emp, EmpleadoDto.class))
+    	                .collect(Collectors.toList());
+    	        respuesta.put(idGrupo, miembros);
+    	    }
+
+    	    return ResponseEntity.ok(respuesta);
+    	}
+
     
     /*no se pueden borrar grupos por id porque es PK
     @DeleteMapping("/{id}")

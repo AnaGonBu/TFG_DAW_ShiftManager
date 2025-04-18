@@ -35,6 +35,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     @Override
     public void eliminar(Integer id) {
         empleadoRepository.deleteById(id);
+ 
     }
     
     @Override
