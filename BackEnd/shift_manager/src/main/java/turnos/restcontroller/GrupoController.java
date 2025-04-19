@@ -104,7 +104,7 @@ public class GrupoController {
     	}
     
 
-    @Operation(summary = "Actualizar un grupo por ID", responses = {
+ /*   @Operation(summary = "Actualizar un grupo por ID", responses = {
     	    @ApiResponse(responseCode = "200", description = "Grupo actualizado correctamente",
     	            content = @Content(schema = @Schema(implementation = GrupoDto.class))),
     	    @ApiResponse(responseCode = "400", description = "Datos inválidos"),
@@ -133,6 +133,26 @@ public class GrupoController {
     	    } catch (IllegalArgumentException e) {
     	        return ResponseEntity.badRequest().build();
     	    }
+    	}
+    
+    */
+    @Operation(summary = "Actualizar grupos",
+    	    responses = {
+    	        @ApiResponse(responseCode = "200", description = "Grupos actualizados correctamente"),
+    	        @ApiResponse(responseCode = "400", description = "Datos inválidos")
+    	})
+    	@PutMapping("/all")
+    	public ResponseEntity<?> actualizarVariosGrupos(@RequestBody List<GrupoDto> grupos) {
+    	    for (GrupoDto dto : grupos) {
+    	        Optional<Grupo> grupoOpt = grupoService.getGrupoById(dto.getIdGrupo());
+    	        if (grupoOpt.isPresent()) {
+    	            Grupo grupo = grupoOpt.get();
+    	            grupo.setFechaInicio(dto.getFechaInicio());
+    	            grupo.setFrecuencia(dto.getFrecuencia());
+    	            grupoService.updateGrupo(grupo.getIdGrupo(), grupo);
+    	        }
+    	    }
+    	    return ResponseEntity.ok().build();
     	}
     
     @Operation(

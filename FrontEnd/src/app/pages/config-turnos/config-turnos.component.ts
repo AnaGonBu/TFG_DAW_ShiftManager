@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Grupo } from '../../interfaces/grupo';
 import { CambiosService } from '../../services/cambios.service';
@@ -17,7 +18,9 @@ export class ConfigTurnosComponent implements OnInit {
   grupos: Grupo[] = [];
   cambioService = inject(CambiosService);
 
+
   @Output() turnosActualizados = new EventEmitter<any[]>(); 
+  router= inject(Router);
 
   constructor(private fb: FormBuilder, private grupoService: GrupoService) {
     this.turnosForm = this.fb.group({});
@@ -25,25 +28,14 @@ export class ConfigTurnosComponent implements OnInit {
 
   async ngOnInit() {
     this.grupos = await this.grupoService.getAllWithPromises();
-    this.initForm();
+     this.initForm();
   }
 
   initForm() {
-    //precarga de fechas en el form de inicio de los turnos, para no ponerlas cada vez para probar 
-    const fechasInicio = [
-      '2025-04-07', 
-      '2025-04-08', 
-      '2025-04-09', 
-      '2025-04-10', 
-      '2025-04-11', 
-      '2025-04-12', 
-      '2025-04-13'  
-    ];
-  
-    const formControls = this.grupos.reduce((acc, grupo, index) => {
+    const formControls = this.grupos.reduce((acc, grupo) => {
       acc[grupo.idGrupo] = this.fb.group({
-        fechaInicio: [fechasInicio[index] || '', Validators.required], 
-        frecuenciaDias: [7, [Validators.required, Validators.min(1)]]
+        fechaInicio: [grupo.fechaInicio || '', Validators.required],
+        frecuenciaDias: [grupo.frecuencia || 7, [Validators.required, Validators.min(1)]]
       });
       return acc;
     }, {} as any);
@@ -52,18 +44,30 @@ export class ConfigTurnosComponent implements OnInit {
   }
 
   guardarTurnos() {
-    const turnos = Object.keys(this.turnosForm.value).map(idGrupo => ({
-      idGrupo: Number(idGrupo),
-      fechaInicio: new Date(this.turnosForm.value[idGrupo].fechaInicio),
-      frecuenciaDias: this.turnosForm.value[idGrupo].frecuenciaDias
-    }));
+    const turnos = Object.keys(this.turnosForm.value).map(idGrupo => {
+      const rawFecha = this.turnosForm.value[idGrupo].fechaInicio;
+  
+      return {
+        idGrupo: Number(idGrupo),
+        fechaInicio: new Date(rawFecha), // convertir string a Date
+        frecuencia: this.turnosForm.value[idGrupo].frecuenciaDias
+      };
+    });
 
-    this.cambioService.actualizarTurnos(turnos); 
-    Swal.fire({
-      icon: 'success',
-      title: 'Turnos guardados',
-      text: 'Los turnos se han actualizado correctamente.',
+    this.grupoService.actualizarTurnos(turnos).then(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Turnos guardados',
+        text: 'Los turnos se han actualizado correctamente.',
+      });
+      this.router.navigate(['/calendario']);
+    }).catch(err => {
+      console.error('Error al actualizar turnos:', err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se pudieron actualizar los turnos. Inténtalo más tarde.',
+      });
     });
   }
-
 }

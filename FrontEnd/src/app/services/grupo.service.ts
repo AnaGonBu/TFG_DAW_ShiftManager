@@ -13,8 +13,13 @@ export class GrupoService {
 
   constructor() { }
 
-  getAllWithPromises(): Promise<any> {
-      return lastValueFrom(this.httpClient.get<{ results: Grupo[] }>(this.baseUrl));
+  getAllWithPromises(): Promise<Grupo[]> {
+      return lastValueFrom(this.httpClient.get< Grupo[] >(this.baseUrl));
+    }
+    
+  actualizarTurnos(gruposActualizados: Partial<Grupo>[]): Promise<any> {
+    const url = `${this.baseUrl}/all`;
+    return lastValueFrom(this.httpClient.put(url, gruposActualizados));
     }
 
 }
