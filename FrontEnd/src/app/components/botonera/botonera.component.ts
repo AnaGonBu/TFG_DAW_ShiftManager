@@ -1,11 +1,13 @@
 import { Component, inject, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
+import { CambiosService } from '../../services/cambios.service';
 import { EmpleadoService } from '../../services/empleado.service';
 
 
 @Component({
   selector: 'app-botonera',
+  standalone:true,
   imports: [RouterLink],
   templateUrl: './botonera.component.html',
   styleUrl: './botonera.component.css'
@@ -13,8 +15,11 @@ import { EmpleadoService } from '../../services/empleado.service';
 export class BotoneraComponent {
 
   empService = inject(EmpleadoService);
+  cambioService = inject(CambiosService)
   router = inject(Router);
 
+  @Input() estadoCambio!: string;
+  @Input() idCambio!: number; 
   @Input() idEmp: number = 0;
   @Input() parent: string = "";
   @Input() estado!: boolean;
@@ -46,7 +51,43 @@ export class BotoneraComponent {
         location.reload();
       }, 0,500);
     });
+  }
+  async cambiarAceptado() {
+    const { isConfirmed } = await Swal.fire({
+      title: '¿Aceptar esta solicitud de cambio?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, aceptar',
+      cancelButtonText: 'Cancelar'
+    });
 
+    if (!isConfirmed) return;
+
+    const updated = await this.cambioService.updateEstadoCambio(this.idCambio, 'ACEPTADO');
+    Swal.fire({
+      icon: 'success',
+      title: 'Cambio aceptado',
+      timer: 1500
+    }).then(() => location.reload());
+  }
+
+  async cambiarDenegado() {
+    const { isConfirmed } = await Swal.fire({
+      title: '¿Denegar esta solicitud de cambio?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, denegar',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (!isConfirmed) return;
+
+    const updated = this.cambioService.updateEstadoCambio(this.idCambio, 'DENEGADO');
+    Swal.fire({
+      icon: 'success',
+      title: 'Cambio denegado',
+      timer: 1500
+    }).then(() => location.reload());
   }
   
 

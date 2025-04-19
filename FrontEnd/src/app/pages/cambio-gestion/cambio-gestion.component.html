@@ -1,1 +1,38 @@
-<p>cambio-gestion works!</p>
+<h2>Gestión de Cambios</h2>
+<div class="btn-group m-2">
+    <button class="btn btn-outline-dark" (click)="filtrar('PENDIENTE')">Pendientes</button>
+    <button class="btn btn-outline-success" (click)="filtrar('ACEPTADO')">Aceptados</button>
+    <button class="btn btn-outline-danger" (click)="filtrar('DENEGADO')">Denegados</button>
+  </div>
+<table class="table table-bordered table-striped mt-4 m-2">
+    <thead>
+        <tr>
+            @for (col of config.columns; track col) {
+            <th>
+                {{ col.label }}
+            </th>
+            }
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (item of data; track item) {
+        <tr>
+            @for (col of config.columns; track col) {
+            <td>
+                {{ item[col.key] }}
+            </td>
+            }
+            <td>
+                @if(listType) {
+                    <app-botonera [parent]="'cambio'" [idCambio]="item.idCambio"
+                                    [estadoCambio]="item.estado"></app-botonera>
+                } @else {
+                    <!-- Opcional: Mostrar algo si no hay tipo (ej. un guión o nada) -->
+                    <span>-</span>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

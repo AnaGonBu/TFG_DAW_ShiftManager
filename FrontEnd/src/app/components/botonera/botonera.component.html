@@ -19,12 +19,31 @@
             </div>
           </div>
     }
-    @else if(parent == 'view'){
+    @else if(parent === 'view'){
     <a [routerLink]="['/empleados']" class="btn btn-dark"> Volver</a>
     <a [routerLink]="['/actualizar','empleado', idEmp]" class="btn btn-dark">Actualizar</a>
     <!--<button class="btn btn-dark" (click)="borrarEmpleado(idEmp)">Borrar</button>-->
     <button (click)="cambiarEstado()" [class.btn-dark]="estado" [class.btn-light]="!estado" class="btn">
       {{ estado ? 'Desactivar' : 'Activar' }}
     </button>
+    }
+    @else if (parent === 'cambio') {
+      <div class="text-center d-flex gap-3 justify-content-center">
+        <div>
+          <input
+            type="checkbox"
+            [checked]="estadoCambio === 'ACEPTADO'"
+            (change)="cambiarAceptado()"/>
+          <div class="small-text">Aceptar</div>
+        </div>
+      
+        <div>
+          <input
+            type="checkbox" [checked]="estadoCambio === 'DENEGADO'"
+            (change)="cambiarDenegado()"/>
+          <div class="small-text">Denegar</div>
+        </div>
+      </div>
+
     }
 </div>
