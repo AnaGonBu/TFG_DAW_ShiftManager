@@ -18,18 +18,25 @@ export class CambiosService {
   
 
   insertCambio(cambio: Cambio): Promise<Cambio> {
+    console.log('Enviando al backend:', cambio);
     return lastValueFrom(this.http.post<Cambio>(this.baseUrl, cambio));
   }
   
-  updateEstadoCambio(idCambio: number, nuevoEstado: string): Promise<Cambio> {
+  async updateEstadoCambio(idCambio: number, nuevoEstado: string): Promise<Cambio> {
+    const cambio = await this.getCambioById(idCambio); // método que deberías agregar si no está
+    cambio.estado = nuevoEstado;
     return lastValueFrom(
-      this.http.put<Cambio>(`${this.baseUrl}/${idCambio}/estado`, { estado: nuevoEstado })
+      this.http.put<Cambio>(`${this.baseUrl}/${idCambio}/estado`, cambio)
     );
   }
+  
   getCambios(): Promise<Cambio[]> {
     return lastValueFrom(this.http.get<Cambio[]>(this.baseUrl));
   }
 
+  getCambioById(id: number): Promise<Cambio> {
+    return lastValueFrom(this.http.get<Cambio>(`${this.baseUrl}/${id}`));
+  }
 
   actualizarTurnos(turnos: any[]) {
     this.turnosSource.next(turnos); 

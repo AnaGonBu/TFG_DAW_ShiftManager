@@ -90,7 +90,7 @@ public class CambiosController {
                 content = @Content(schema = @Schema(implementation = CambiosDto.class))),
             @ApiResponse(responseCode = "404", description = "Cambio no encontrado")
         })
-        @PutMapping("/{id}")
+        @PutMapping("/{id}/estado")
         public ResponseEntity<CambiosDto> updateCambio(
             @Parameter(description = "ID del cambio a actualizar") @PathVariable Integer id,
             @Parameter(description = "Datos actualizados del cambio") @RequestBody CambiosDto cambioDto) {
