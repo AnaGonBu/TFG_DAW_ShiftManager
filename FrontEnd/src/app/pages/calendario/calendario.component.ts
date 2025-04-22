@@ -3,8 +3,9 @@ import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { CambiosService } from '../../services/cambios.service';
+import { GrupoService } from '../../services/grupo.service';
 import { EmpleadoService } from '../../services/empleado.service';
+import { Grupo } from '../../interfaces/grupo';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,6 @@ import { EmpleadoService } from '../../services/empleado.service';
   styleUrl: './calendario.component.css',
   encapsulation: ViewEncapsulation.None
 })
-
 export class CalendarioComponent implements OnInit {
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -24,45 +24,42 @@ export class CalendarioComponent implements OnInit {
     eventContent: this.cargarEmpleados.bind(this)
   };
 
-  turnosService = inject(CambiosService);
+  grupoService = inject(GrupoService);
   empleadoService = inject(EmpleadoService);
-  
+
   constructor() {}
 
-  ngOnInit() {
-    this.turnosService.turnos$.subscribe(turnos => {
-      this.actualizarGrupos(turnos);
-    });
-  }
-
-  actualizarGrupos(turnos: any[]) {
-    const eventos = turnos.flatMap(turno => this.cargarGrupos(turno));
+  async ngOnInit() {
+    const grupos = await this.grupoService.getAllWithPromises();
+    const eventos = grupos.flatMap(grupo => this.generarEventosGrupo(grupo));
     this.calendarOptions = { ...this.calendarOptions, events: eventos };
   }
 
-  cargarGrupos(turno: any) { 
+  generarEventosGrupo(grupo: Grupo) {
     const eventos = [];
-    let fecha = new Date(turno.fechaInicio);
+    let fecha = new Date(grupo.fechaInicio);
     const hoy = new Date();
 
-    while (fecha <= new Date(hoy.getFullYear(), hoy.getMonth() + 6, 0)) { //definimos hasta cuando se repite en meses (actual 6 meses)
+    
+    const fechaLimite = new Date(hoy.getFullYear(), hoy.getMonth() + 6, 0); //definimos los meses de turnos mostrados (actual 6)
+
+    while (fecha <= fechaLimite) {
       eventos.push({
-        title: `Grupo ${turno.idGrupo}`,
+        title: `Grupo ${grupo.idGrupo}`,
         start: fecha.toISOString().split('T')[0]
       });
 
-      fecha.setDate(fecha.getDate() + turno.frecuenciaDias);
+      fecha.setDate(fecha.getDate() + grupo.frecuencia); 
     }
 
     return eventos;
   }
 
-
-
-
   cargarEmpleados(arg: any) {
-    const idGrupo = arg.event.title.replace('idGrupo ', '');
-    const collapseId = `collapseGrupo${idGrupo}${arg.event.startStr.replaceAll('-', '')}`;
+    const idGrupo = Number(arg.event.title.replace('Grupo ', ''));
+    const fechaStr = arg.event.startStr.replaceAll('-', '');
+    const collapseId = `collapseGrupo${idGrupo}${fechaStr}`;
+    const empleadosDivId = `empleados-${idGrupo}-${fechaStr}`;
   
     const container = document.createElement('div');
     container.innerHTML = `
@@ -75,20 +72,20 @@ export class CalendarioComponent implements OnInit {
   
       <div class="collapse mt-1" id="${collapseId}">
         <div class="card card-body p-1 text-start" style="font-size: 12px; background-color: #f8f9fa; color: #212529; border: 1px solid #6c757d;">
-          <div id="empleados-${idGrupo}">Cargando...</div>
+          <div id="${empleadosDivId}">Cargando...</div>
         </div>
       </div>
     `;
   
-    this.empleadoService.getByGrupo(+idGrupo).then(empleados => {
-      const contenedor = document.getElementById(`empleados-${idGrupo}`);
+    this.empleadoService.getByGrupo(idGrupo).then(empleados => {
+      const contenedor = document.getElementById(empleadosDivId);
       if (contenedor) {
         contenedor.innerHTML = empleados.length > 0
           ? empleados.map(e => `<div>• ${e.nombre} ${e.apellidos}</div>`).join('')
           : '<div class="text-muted">No hay empleados asignados</div>';
       }
     }).catch(() => {
-      const contenedor = document.getElementById(`empleados-${idGrupo}`);
+      const contenedor = document.getElementById(empleadosDivId);
       if (contenedor) {
         contenedor.innerHTML = '<div class="text-danger">Error al cargar empleados</div>';
       }
@@ -96,6 +93,8 @@ export class CalendarioComponent implements OnInit {
   
     return { domNodes: [container] };
   }
-  
 
+  
 }
+
+

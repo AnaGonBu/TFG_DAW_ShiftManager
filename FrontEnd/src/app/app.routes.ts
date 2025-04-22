@@ -8,7 +8,7 @@ import { EmpViewComponent } from './pages/emp-view/emp-view.component';
 import { ConfigTurnosComponent } from './pages/config-turnos/config-turnos.component';
 
 export const routes: Routes = [
-    { path: "", pathMatch: "full", redirectTo: "empleados"},
+    { path: "", pathMatch: "full", redirectTo: "calendario"},
     { path: "empleados", component: EmpListComponent},
     { path: "nuevo/empleado", component: EmpFormComponent },
     { path: "empleado/:idEmp", component: EmpViewComponent},
@@ -17,6 +17,6 @@ export const routes: Routes = [
     { path: 'cambio', component: CambioComponent},
     { path: 'cambio/gestion', component: CambioGestionComponent},
     { path: 'turnos', component: ConfigTurnosComponent},
-    { path: "**", redirectTo: "empleados"}
+    { path: "**", redirectTo: "calendario"}
 ];
 
