@@ -55,7 +55,7 @@ CREATE TABLE cambios_grupo (
 
 
 
-select * from cambios;
+select * from grupos;
 
 
 
