@@ -9,7 +9,53 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="vacantesDropdown" role="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      Calendario
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="vacantesDropdown">
+                      <li>
+                        <a class="dropdown-item" [routerLink]="['/calendario']">Calendario de trabajo</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" [routerLink]="['/turnos']">Configurador de Turnos</a>
+                      </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="vacantesDropdown" role="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      Cambios
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="vacantesDropdown">
+                      <li>
+                        <a class="dropdown-item" [routerLink]="['/cambio']">Solicitud de cambio</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" [routerLink]="['/cambio/gestion']">Gestión de cambios</a>
+                      </li>
+                    </ul>
+                </li> 
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="vacantesDropdown" role="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      Empleados
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="vacantesDropdown">
+                      <li>
+                        <a class="dropdown-item" [routerLink]="['empleados']">Listado de empleados</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" [routerLink]="['/nuevo/empleado']">Nuevo empleado</a>
+                      </li>
+                    </ul>
+                </li>
+
+                <!--<li class="nav-item">
                     <a class="nav-link" [routerLink]="['/calendario']" routerLinkActive="active">Calendario</a>
                 </li>
                 <li class="nav-item">
@@ -26,7 +72,10 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/nuevo/empleado']" routerLinkActive="active">Nuevo</a>
-                </li>
+                </li>-->
+
+
+
             </ul>
         </div>
     </div>
