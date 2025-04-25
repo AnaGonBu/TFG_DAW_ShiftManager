@@ -19,8 +19,6 @@ export class CambioGestionComponent {
   estadoFiltro = 'PENDIENTE';
   todosLosCambios: Cambio[] = [];
 
-  
-  
   async ngOnInit() {
     this.todosLosCambios = await this.cambioService.getCambios();
     this.filtrar(this.estadoFiltro);

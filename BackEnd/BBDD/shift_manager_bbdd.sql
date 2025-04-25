@@ -40,6 +40,7 @@ estado varchar (10) not null default 'PENDIENTE',
 foreign key(id_solicitante) references empleados(id_emp),
 foreign key(id_concede) references empleados(id_emp)
 );
+
 CREATE TABLE cambios_grupo (
     id_cambio_grupo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_cambio INT NOT NULL,
