@@ -1,0 +1,30 @@
+<div class="calendar-container">
+    <div class="calendar-header">
+      <button (click)="previousMonth()" class="btn btn-outline-primary">< Prev</button>
+      <h2>{{ monthNames[currentDate.getMonth()] }} {{ currentDate.getFullYear() }}</h2>
+      <button (click)="nextMonth()" class="btn btn-outline-primary">Next ></button>
+      <button (click)="goToToday()" class="btn btn-outline-secondary ms-2">Hoy</button>
+    </div>
+  
+    <div class="calendar-grid">
+      @for(dayName of dayNames; track dayName) {
+        <div class="calendar-weekday">{{ dayName }}</div>
+      }
+      @for(day of monthDays; track day.date) {
+        <div 
+          class="calendar-day"
+          [class.not-current-month]="!day.isCurrentMonth"
+          [class.today]="day.isToday"
+          [class.has-grupo]="day.grupoScheduled">
+          <span class="day-number">{{ day.dayOfMonth }}</span>
+          @if (day.grupoScheduled && day.isCurrentMonth) {
+            <button 
+              class="btn btn-sm btn-info w-100 mt-1 group-button"
+              (click)="selectGrupo(day.grupoScheduled.idGrupo, day.date)">
+              {{ day.grupoScheduled.nombreGrupo }}
+            </button>
+          }
+        </div>
+      }
+    </div>
+  </div>

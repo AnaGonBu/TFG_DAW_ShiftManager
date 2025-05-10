@@ -3,11 +3,11 @@ import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { GrupoService } from '../../services/grupo.service';
-import { EmpleadoService } from '../../services/empleado.service';
+import { Empleado } from '../../interfaces/empleado';
 import { Grupo } from '../../interfaces/grupo';
 import { CambiosService } from '../../services/cambios.service';
-import { Empleado } from '../../interfaces/empleado';
+import { EmpleadoService } from '../../services/empleado.service';
+import { GrupoService } from '../../services/grupo.service';
 
 @Component({
   selector: 'app-root',

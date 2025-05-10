@@ -49,7 +49,7 @@ import {
   sortEventSegs,
   y
 } from "./chunk-JKG7XCCY.js";
-import "./chunk-WDMUDEB6.js";
+import "./chunk-3OV72XIM.js";
 
 // node_modules/@fullcalendar/daygrid/internal.js
 var TableView = class extends DateComponent {

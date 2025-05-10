@@ -1,0 +1,126 @@
+.calendar-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .calendar-header h2 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #333;
+  }
+  
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px; /* Gap between cells */
+  }
+  
+  .calendar-weekday,
+  .calendar-day {
+    text-align: center;
+    padding: 10px 5px; /* Reduced padding for smaller cells */
+    border: 1px solid #f0f0f0; /* Light border for each cell */
+    min-height: 90px; /* Minimum height for cells */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align content to the top */
+    background-color: #fff;
+    position: relative;
+  }
+  
+  .calendar-weekday {
+    font-weight: bold;
+    background-color: #f8f9fa;
+    color: #555;
+    min-height: auto; /* Weekdays don't need as much height */
+    padding: 10px 0;
+  }
+  
+  .day-number {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    color: #333;
+    align-self: flex-start; /* Number to the top-left */
+    padding: 2px 4px;
+  }
+  
+  .not-current-month .day-number {
+    color: #ccc;
+  }
+  .not-current-month .group-button {
+    visibility: hidden; /* Hide buttons for non-current month days to reduce clutter */
+  }
+  
+  
+  .today {
+    background-color: #e6f7ff; /* Light blue for today */
+    border: 1px solid #91d5ff;
+  }
+  
+  .today .day-number {
+    font-weight: bold;
+    color: #0056b3;
+  }
+  
+  .has-grupo {
+    /* You can add specific styles for days with groups if needed */
+  }
+  
+  .group-button {
+    font-size: 0.75em; /* Smaller font for button */
+    padding: 3px 6px; /* Smaller padding */
+    white-space: normal; /* Allow text wrapping */
+    line-height: 1.2;
+    max-width: 90%; /* Prevent button from overflowing too much */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis if text is too long */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .calendar-header h2 {
+      font-size: 1.4em;
+    }
+    .calendar-day {
+      min-height: 70px;
+      padding: 5px 2px;
+    }
+    .group-button {
+      font-size: 0.7em;
+    }
+    .day-number {
+      font-size: 0.8em;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .calendar-header {
+      flex-direction: column;
+    }
+    .calendar-header h2 {
+      margin-bottom: 10px;
+    }
+    .calendar-weekday {
+      font-size: 0.8em;
+      padding: 8px 0;
+    }
+     .calendar-day {
+      min-height: 60px; /* Even smaller height */
+    }
+  }

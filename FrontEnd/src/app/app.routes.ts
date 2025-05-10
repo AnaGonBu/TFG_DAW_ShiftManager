@@ -1,24 +1,21 @@
 import { Routes } from '@angular/router';
-import { CalendarioComponent } from './pages/calendario/calendario.component';
-import { CambioGestionComponent } from './pages/cambio-gestion/cambio-gestion.component';
-import { CambioComponent } from './pages/cambio/cambio.component';
-import { EmpFormComponent } from './pages/emp-form/emp-form.component';
-import { EmpListComponent } from './pages/emp-list/emp-list.component';
-import { EmpViewComponent } from './pages/emp-view/emp-view.component';
-import { ConfigTurnosComponent } from './pages/config-turnos/config-turnos.component';
-import { LoginComponent } from './pages/login/login.component';
+import { CalendarComponent } from './calendar/calendar/calendar.component';
+
 
 export const routes: Routes = [
     { path: "", pathMatch: "full", redirectTo: "calendario"},
-    { path: "empleados", component: EmpListComponent},
-    { path: "nuevo/empleado", component: EmpFormComponent },
-    { path: "empleado/:idEmp", component: EmpViewComponent},
-    { path: "actualizar/empleado/:idEmp", component: EmpFormComponent},
-    { path: 'calendario', component: CalendarioComponent },
-    { path: 'cambio', component: CambioComponent},
-    { path: 'cambio/gestion', component: CambioGestionComponent},
-    { path: 'turnos', component: ConfigTurnosComponent},
-    { path: "login", component: LoginComponent},
+    { path: 'calendario', component: CalendarComponent },
+    { path: "empleados",loadComponent: () => import('./pages/emp-list/emp-list.component').then(m =>m.EmpListComponent)},
+    { path: "nuevo/empleado",loadComponent: () => import( './pages/emp-form/emp-form.component').then( m => m.EmpFormComponent )},
+    { path: "empleado/:idEmp",loadComponent: () => import('./pages/emp-view/emp-view.component' ).then( m => m.EmpViewComponent)},
+    { path: "actualizar/empleado/:idEmp",loadComponent: () =>import('./pages/emp-form/emp-form.component' ).then ( m => m.EmpFormComponent)},
+    //{ path: 'calendario',loadComponent: () => import( './pages/calendario/calendario.component').then( m => m.CalendarioComponent )},
+    { path: 'cambio',loadComponent: () => import('./pages/cambio/cambio.component' ).then( m => m.CambioComponent)},
+    { path: 'cambio/gestion',loadComponent: () => import('./pages/cambio-gestion/cambio-gestion.component' ).then( m => m.CambioGestionComponent)},
+    { path: 'turnos',loadComponent: () => import( './pages/config-turnos/config-turnos.component').then( m => m.ConfigTurnosComponent)},
+    { path: "login",loadComponent: () => import('./pages/login/login.component' ).then( m => m.LoginComponent)},
     { path: "**", redirectTo: "calendario"}
+
+
 ];
 

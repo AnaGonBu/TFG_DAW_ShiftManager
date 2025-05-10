@@ -1,34 +1,71 @@
-<div class="row gx-2 gy-2 d-flex justify-content-center">
+  <div class="row gx-2 gy-2 d-flex justify-content-center">
 
-  <!--<button class="btn btn-dark" [routerLink]="['/nuevo/empleado']" routerLinkActive="active" style="width: 300px; height: 50px; border-radius: 5px;">
-    Nuevo empleado
-  </button>-->
-  
-  
-    <div class="container">
-        @for (grupoId of [1, 2, 3, 4, 5, 6, 7]; track grupoId) {
-          <h2 class="text-center my-4">Grupo {{ grupoId }}</h2>
+    <!--<button class="btn btn-dark" [routerLink]="['/nuevo/empleado']" routerLinkActive="active" style="width: 300px; height: 50px; border-radius: 5px;">
+      Nuevo empleado
+    </button>-->
+    
+<!--     
+      <div class="container">
+          @for (grupoId of [1, 2, 3, 4, 5, 6, 7]; track grupoId) {
+            <h2 class="text-center my-4">Grupo {{ grupoId }}</h2>
+            <div class="row justify-content-center gx-2 gy-3">
+              @for (empleado of arrEmpleados; track empleado.idEmp) {
+                @if (empleado.idGrupo === grupoId) {
+                  <article class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center" style="max-width: 200px;">
+                    <app-emp-card [miEmp]="empleado"></app-emp-card>
+                  </article>
+                }
+              }
+            </div>
+          }
+      </div> -->
+      <div class="container mt-3">
+        <div class="text-center mb-4">
+          <h2>{{ tituloPagina }}</h2>
+        </div>
+      
+        @if (empleadosTurnos.length > 0) {
           <div class="row justify-content-center gx-2 gy-3">
-            @for (empleado of arrEmpleados; track empleado.idEmp) {
-              @if (empleado.idGrupo === grupoId) {
+            @for (empleado of empleadosTurnos; track empleado.idEmp) {
+              <article class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center" style="max-width: 220px;">
+                <app-emp-card [miEmp]="empleado"></app-emp-card> 
+                <!-- If you need to pass cambioInfo, the backend DTO would need to include it -->
+              </article>
+            }
+          </div>
+        } @else if (idGrupoActual !== null || fechaActual !== null) {
+          <p class="text-center text-muted">
+              No hay empleados para mostrar para el grupo y fecha seleccionados, o el grupo no tiene turnos ese día.
+          </p>
+        }
+      
+        <!-- Fallback to original grouped view if no specific group/date is selected -->
+        @if (idGrupoActual === null && fechaActual === null && empleadosAgrupadosParaVistaGeneral.length > 0) {
+          @for(grupo of empleadosAgrupadosParaVistaGeneral; track grupo.grupoId) {
+            <h3 class="text-center my-4">Grupo {{ grupo.grupoId }}</h3>
+            <div class="row justify-content-center gx-2 gy-3">
+              @for (empleado of grupo.empleados; track empleado.idEmp) {
                 <article class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center" style="max-width: 200px;">
                   <app-emp-card [miEmp]="empleado"></app-emp-card>
                 </article>
               }
-            }
-          </div>
+            </div>
+          }
+        } @else if (idGrupoActual === null && fechaActual === null && empleadosTurnos.length === 0) {
+           <p class="text-center text-muted">No hay empleados para mostrar.</p>
         }
-    </div>
-  
-    <!-- <div class="d-flex justify-content-center">
-      <pagination-controls 
-        (pageChange)="page = $event" 
-        [maxSize]="5" 
-        [directionLinks]="true" 
-        [autoHide]="true">
-      </pagination-controls>
-    </div> -->
+      
+      </div>
+    
+      <!-- <div class="d-flex justify-content-center">
+        <pagination-controls 
+          (pageChange)="page = $event" 
+          [maxSize]="5" 
+          [directionLinks]="true" 
+          [autoHide]="true">
+        </pagination-controls>
+      </div> -->
 
-</div>
-  
-  
+  </div>
+    
+    
