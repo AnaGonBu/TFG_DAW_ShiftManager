@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Grupo } from '../../interfaces/grupo'; // Assuming this interface matches backend DTO/Entity
@@ -15,7 +15,7 @@ interface CalendarDay {
 @Component({
   selector: 'app-calendario', // More specific selector
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'] // Plural styleUrls
 })
@@ -153,15 +153,14 @@ export class CalendarComponent implements OnInit {
   }
 
   selectGrupo(grupoId: number, date: Date) {
-    const dateString = date.toISOString().split('T')[0]; // YYYY-MM-DD
-    // Navigate to emp-list, passing idGrupo as path param and date as query param
+    // Construir la fecha en formato YYYY-MM-DD usando la fecha local
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // getMonth() es 0-indexed
+    const day = date.getDate().toString().padStart(2, '0');
+    const dateString = `${year}-${month}-${day}`;
+  
     this.router.navigate(['/empleados/grupo', grupoId], { queryParams: { fecha: dateString } });
   }
 
-  formatDateForBackend(date: Date): string {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  }
+
 }
