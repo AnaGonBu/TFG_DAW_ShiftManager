@@ -54,15 +54,54 @@ INSERT INTO empleados (nombre, apellidos, email, url_imagen, domicilio, fecha_in
 
 
 
-INSERT INTO cambios (id_solicitante, id_concede, fecha_solicitud, fecha_turno1, fecha_turno2) VALUES
-(3, 15, '2024-03-01', '2024-03-10', '2024-03-15'),
-(7, 21, '2024-03-05', '2024-03-12', '2024-03-17'),
-(12, 8, '2024-03-08', '2024-03-14', '2024-03-20'),
-(19, 4, '2024-03-10', '2024-03-18', '2024-03-23'),
-(25, 11, '2024-03-15', '2024-03-22', '2024-03-28'),
-(5, 27, '2024-03-18', '2024-03-25', '2024-03-30'),
-(14, 2, '2024-03-20', '2024-03-26', '2024-04-01'),
-(22, 9, '2024-03-22', '2024-03-29', '2024-04-03'),
-(10, 26, '2024-03-25', '2024-04-01', '2024-04-06'),
-(1, 17, '2024-03-28', '2024-04-04', '2024-04-09');
+INSERT INTO cambios (id_solicitante, id_concede, fecha_solicitud, fecha_turno1, fecha_turno2, estado) VALUES
+(3, 15, '2024-03-01', '2024-03-10', '2024-03-15', 'ACEPTADO'), -- id_cambio = 1
+(7, 21, '2024-03-05', '2024-03-12', '2024-03-17', 'ACEPTADO'), -- id_cambio = 2
+(12, 8, '2024-03-08', '2024-03-14', '2024-03-20', 'ACEPTADO'), -- id_cambio = 3
+(19, 4, '2024-03-10', '2024-03-18', '2024-03-23', 'ACEPTADO'), -- id_cambio = 4
+(25, 11, '2024-03-15', '2024-03-22', '2024-03-28', 'ACEPTADO'), -- id_cambio = 5
+(5, 27, '2024-03-18', '2024-03-25', '2024-03-30', 'PENDIENTE'), -- id_cambio = 6
+(14, 2, '2024-03-20', '2024-03-26', '2024-04-01', 'ACEPTADO'), -- id_cambio = 7
+(22, 9, '2024-03-22', '2024-03-29', '2024-04-03', 'DENEGADO'), -- id_cambio = 8
+(10, 26, '2024-03-25', '2024-04-01', '2024-04-06', 'ACEPTADO'), -- id_cambio = 9
+(1, 17, '2024-03-28', '2024-04-04', '2024-04-09', 'ACEPTADO'); -- id_cambio = 10
 
+-- Para id_cambio = 1 (Solicitante 3[G1], Concede 15[G4], fecha1=10/Mar, fecha2=15/Mar)
+INSERT INTO cambios_grupo (id_cambio, id_empleado, fecha, id_grupo_origen, id_grupo_destino) VALUES
+(1, 3, '2024-03-15', 1, 4), -- Solicitante 3 trabaja el 15/Mar en Grupo 4
+(1, 15, '2024-03-10', 4, 1); -- Concede 15 trabaja el 10/Mar en Grupo 1
+
+-- Para id_cambio = 2 (Solicitante 7[G2], Concede 21[G6], fecha1=12/Mar, fecha2=17/Mar)
+INSERT INTO cambios_grupo (id_cambio, id_empleado, fecha, id_grupo_origen, id_grupo_destino) VALUES
+(2, 7, '2024-03-17', 2, 6), -- Solicitante 7 trabaja el 17/Mar en Grupo 6
+(2, 21, '2024-03-12', 6, 2); -- Concede 21 trabaja el 12/Mar en Grupo 2
+
+-- Para id_cambio = 3 (Solicitante 12[G3], Concede 8[G2], fecha1=14/Mar, fecha2=20/Mar)
+INSERT INTO cambios_grupo (id_cambio, id_empleado, fecha, id_grupo_origen, id_grupo_destino) VALUES
+(3, 12, '2024-03-20', 3, 2), -- Solicitante 12 trabaja el 20/Mar en Grupo 2
+(3, 8, '2024-03-14', 2, 3); -- Concede 8 trabaja el 14/Mar en Grupo 3
+
+-- Para id_cambio = 4 (Solicitante 19[G5], Concede 4[G1], fecha1=18/Mar, fecha2=23/Mar)
+INSERT INTO cambios_grupo (id_cambio, id_empleado, fecha, id_grupo_origen, id_grupo_destino) VALUES
+(4, 19, '2024-03-23', 5, 1), -- Solicitante 19 trabaja el 23/Mar en Grupo 1
+(4, 4, '2024-03-18', 1, 5); -- Concede 4 trabaja el 18/Mar en Grupo 5
+
+-- Para id_cambio = 5 (Solicitante 25[G7], Concede 11[G3], fecha1=22/Mar, fecha2=28/Mar)
+INSERT INTO cambios_grupo (id_cambio, id_empleado, fecha, id_grupo_origen, id_grupo_destino) VALUES
+(5, 25, '2024-03-28', 7, 3), -- Solicitante 25 trabaja el 28/Mar en Grupo 3
+(5, 11, '2024-03-22', 3, 7); -- Concede 11 trabaja el 22/Mar en Grupo 7
+
+-- Para id_cambio = 7 (Solicitante 14[G4], Concede 2[G1], fecha1=26/Mar, fecha2=01/Abr)
+INSERT INTO cambios_grupo (id_cambio, id_empleado, fecha, id_grupo_origen, id_grupo_destino) VALUES
+(7, 14, '2024-04-01', 4, 1), -- Solicitante 14 trabaja el 01/Abr en Grupo 1
+(7, 2, '2024-03-26', 1, 4); -- Concede 2 trabaja el 26/Mar en Grupo 4
+
+-- Para id_cambio = 9 (Solicitante 10[G3], Concede 26[G7], fecha1=01/Abr, fecha2=06/Abr)
+INSERT INTO cambios_grupo (id_cambio, id_empleado, fecha, id_grupo_origen, id_grupo_destino) VALUES
+(9, 10, '2024-04-06', 3, 7), -- Solicitante 10 trabaja el 06/Abr en Grupo 7
+(9, 26, '2024-04-01', 7, 3); -- Concede 26 trabaja el 01/Abr en Grupo 3
+
+-- Para id_cambio = 10 (Solicitante 1[G1], Concede 17[G5], fecha1=04/Abr, fecha2=09/Abr)
+INSERT INTO cambios_grupo (id_cambio, id_empleado, fecha, id_grupo_origen, id_grupo_destino) VALUES
+(10, 1, '2024-04-09', 1, 5), -- Solicitante 1 trabaja el 09/Abr en Grupo 5
+(10, 17, '2024-04-04', 5, 1); -- Concede 17 trabaja el 04/Abr en Grupo 1

@@ -213,7 +213,7 @@ interface GrupoConEmpleadosView {
 @Component({
   selector: 'app-emp-list',
   standalone: true,
-  imports: [CommonModule, EmpCardComponent],
+  imports: [CommonModule,EmpCardComponent],
   templateUrl: './emp-list.component.html',
   styleUrls: ['./emp-list.component.css']
 })

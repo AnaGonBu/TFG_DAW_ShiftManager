@@ -4,6 +4,7 @@ import { BotoneraComponent } from '../botonera/botonera.component';
 
 @Component({
   selector: 'app-emp-card',
+  standalone:true,
   imports: [BotoneraComponent],
   templateUrl: './emp-card.component.html',
   styleUrl: './emp-card.component.css'
