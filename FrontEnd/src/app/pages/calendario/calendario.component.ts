@@ -135,7 +135,8 @@ export class CalendarioComponent implements OnInit {
                   const nombreSolicitante = solicitante ? `${solicitante.nombre} ${solicitante.apellidos}` : 'Empleado desconocido';
                   const nombreConcede = concede ? `${concede.nombre} ${concede.apellidos}` : 'Empleado desconocido';
     
-                  return `<div>• <strong>${nombreSolicitante}</strong> cambia por <strong>${nombreConcede}</strong></div>`;
+                  return `<div style="font-size: 11px; max-width: 100%; overflow-wrap: break-word; white-space: normal;"> 
+                  • <strong>${nombreSolicitante}</strong> cambia por <strong>${nombreConcede}</strong></div>`;
                 }).join('')}
               </div>
             </div>
