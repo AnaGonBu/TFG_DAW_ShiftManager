@@ -10,7 +10,7 @@ INSERT INTO grupos (id_grupo, nombre_grupo, num_emp, descripcion, estado,fecha_i
 
 INSERT INTO empleados (nombre, apellidos, email, password, rol, url_imagen, domicilio, fecha_ingreso, fecha_nacimiento, situacion, estado, id_grupo) VALUES
 -- Admin
-('Administrador', 'root', 'admin@admin.com', 'admin', 'admin', 'https://peru.unir.net/wp-content/uploads/sites/2/2025/04/Como-ser-hacker-y-que-estudios-se-necesitan1.jpg', 'Calle 16 de Septiembre 89', '2024-01-05', '1989-05-30', 'Alta', 0, 1),
+('Administrador', 'root', 'admin@admin.com', 'admin', 'admin', 'https://i.ytimg.com/vi/KEkrWRHCDQU/hqdefault.jpg', 'Calle 16 de Septiembre 89', '2024-01-05', '1989-05-30', 'Alta', 0, 1),
 
 -- Grupo 1
 ('Juan', 'Pérez López', 'juan.g1@empresa.com', 'admin', 'user', 'https://i.pravatar.cc/150?img=1', 'Calle Falsa 123', '2024-01-15', '1990-05-10', 'Alta', 1, 1),
