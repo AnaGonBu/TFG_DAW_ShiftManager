@@ -112,6 +112,8 @@ public class EmpleadoController {
                 empleadoActualizado.setNombre(dto.getNombre());
                 empleadoActualizado.setApellidos(dto.getApellidos());
                 empleadoActualizado.setEmail(dto.getEmail());
+                empleadoActualizado.setEmail(dto.getPassword());
+                empleadoActualizado.setEmail(dto.getRol());
                 empleadoActualizado.setImagen(dto.getImagen());
                 empleadoActualizado.setDomicilio(dto.getDomicilio());
                 empleadoActualizado.setFechaIngreso(dto.getFechaIngreso());

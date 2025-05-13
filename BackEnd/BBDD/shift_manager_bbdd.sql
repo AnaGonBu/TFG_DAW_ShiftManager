@@ -18,16 +18,17 @@ create table empleados
 nombre varchar(45) not null,
 apellidos varchar(100) not null,
 email varchar(100) not null unique,
+password varchar(100) NOT NULL,
+rol varchar(45) not null,
 url_imagen varchar(300),
 domicilio varchar(100),
 fecha_ingreso date,
 fecha_nacimiento date,
 situacion varchar(100),
 estado boolean,
-id_grupo int not null,
+id_grupo int,
 foreign key(id_grupo) references grupos(id_grupo)
 );
-
 
 create table cambios 
 (id_cambio int not null auto_increment primary key,
@@ -56,7 +57,7 @@ CREATE TABLE cambios_grupo (
 
 
 
-select * from grupos;
+select * from empleados;
 
 
 

@@ -36,6 +36,12 @@ public class EmpleadoDto implements Serializable{
 
     @Schema(description = "Correo electrónico del empleado", example = "juan.perez@empresa.com")
     private String email;
+    
+    @Schema(description = "Contraseña del empleado", example = "contraseña123")
+    private String password;
+    
+    @Schema(description = "Rol en la aplicación Admin/User", example = "User")
+    private String rol;
 
     @Schema(description = "URL de la imagen del empleado", example = "https://miapp.com/imagenes/juan.jpg")
     private String imagen;

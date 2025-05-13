@@ -29,14 +29,17 @@ public class Empleado implements Serializable{
     @Column(name = "id_emp")
     private Integer idEmp;
     
-  /*  @Enumerated(EnumType.STRING)
-    private Role rol;*/
-
     private String nombre;
 
     private String apellidos;
 
     private String email;
+    
+    @Column(name = "password")
+    private String password;
+    
+    @Column(name = "rol")
+    private String rol;
     
     @Column(name = "url_imagen")
     private String imagen;
