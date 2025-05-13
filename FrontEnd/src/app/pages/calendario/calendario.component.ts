@@ -58,44 +58,7 @@ export class CalendarioComponent implements OnInit {
     return eventos;
   }
 
-  /**cargarEmpleados(arg: any) {
-    const idGrupo = Number(arg.event.title.replace('Grupo ', ''));
-    const fechaStr = arg.event.startStr.replaceAll('-', '');
-    const collapseId = `collapseGrupo${idGrupo}${fechaStr}`;
-    const empleadosDivId = `empleados-${idGrupo}-${fechaStr}`;
   
-    const container = document.createElement('div');
-    container.innerHTML = `
-      <button 
-        class="grupo-button" 
-        data-bs-toggle="collapse" 
-        data-bs-target="#${collapseId}">
-        ${arg.event.title}
-      </button>
-  
-      <div class="collapse mt-1" id="${collapseId}">
-        <div class="card card-body p-1 text-start" style="font-size: 12px; background-color: #f8f9fa; color: #212529; border: 1px solid #6c757d;">
-          <div id="${empleadosDivId}">Cargando...</div>
-        </div>
-      </div>
-    `;
-  
-    this.empleadoService.getByGrupo(idGrupo).then(empleados => {
-      const contenedor = document.getElementById(empleadosDivId);
-      if (contenedor) {
-        contenedor.innerHTML = empleados.length > 0
-          ? empleados.map(e => `<div>• ${e.nombre} ${e.apellidos}</div>`).join('')
-          : '<div class="text-muted">No hay empleados asignados</div>';
-      }
-    }).catch(() => {
-      const contenedor = document.getElementById(empleadosDivId);
-      if (contenedor) {
-        contenedor.innerHTML = '<div class="text-danger">Error al cargar empleados</div>';
-      }
-    });
-  
-    return { domNodes: [container] };
-  }*/
 
 
     cargarEmpleados(arg: any) {

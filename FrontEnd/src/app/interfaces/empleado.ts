@@ -4,6 +4,8 @@ export interface Empleado {
   nombre: string,
   apellidos: string,
   email: string,
+  password: string,
+  rol: string,
   imagen: string,
   domicilio: string,
   fechaIngreso: Date,

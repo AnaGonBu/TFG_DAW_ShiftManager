@@ -5,15 +5,11 @@
               <i [routerLink]="['/empleado', idEmp]" class="bi bi-search pointer"></i>
               <div class="small-text">Detalle</div>
             </div>    
-            <div class="text-center">
+            <div class="text-center" *ngIf="rol === 'admin'">
               <i [routerLink]="['/actualizar','empleado', idEmp]" class="bi bi-arrow-clockwise pointer"></i>
               <div class="small-text">Actualizar</div>
             </div>
-            <!-- <div class="text-center">
-              <i class="bi bi-trash pointer" (click)="borrarEmpleado(idEmp)"></i>
-              <div class="small-text">Borrar</div>
-            </div> -->
-            <div class="text-center">
+            <div class="text-center" *ngIf="rol === 'admin'">
               <input type="checkbox" [checked]="estado" (change)="cambiarEstado()">
               <div class="small-text">{{ estado ? 'Activo' : 'Inactivo' }}</div>
             </div>
@@ -21,9 +17,8 @@
     }
     @else if(parent === 'view'){
     <a [routerLink]="['/empleados']" class="btn btn-dark"> Volver</a>
-    <a [routerLink]="['/actualizar','empleado', idEmp]" class="btn btn-dark">Actualizar</a>
-    <!--<button class="btn btn-dark" (click)="borrarEmpleado(idEmp)">Borrar</button>-->
-    <button (click)="cambiarEstado()" [class.btn-dark]="estado" [class.btn-light]="!estado" class="btn">
+    <a *ngIf="rol === 'admin'" [routerLink]="['/actualizar','empleado', idEmp]" class="btn btn-dark">Actualizar</a>
+    <button *ngIf="rol === 'admin'" (click)="cambiarEstado()" [class.btn-dark]="estado" [class.btn-light]="!estado" class="btn">
       {{ estado ? 'Desactivar' : 'Activar' }}
     </button>
     }

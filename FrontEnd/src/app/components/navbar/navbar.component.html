@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark" *ngIf="isLoggedIn()">
     <div class="container-fluid">
         <a class="navbar-brand" [routerLink]="['/empleados']">
             <i class="bi bi-people"></i>
@@ -19,7 +19,7 @@
                       <li>
                         <a class="dropdown-item" [routerLink]="['/calendario']">Calendario de trabajo</a>
                       </li>
-                      <li>
+                      <li *ngIf="rol === 'admin'">
                         <a class="dropdown-item" [routerLink]="['/turnos']">Configurador de Turnos</a>
                       </li>
                     </ul>
@@ -34,7 +34,7 @@
                       <li>
                         <a class="dropdown-item" [routerLink]="['/cambio']">Solicitud de cambio</a>
                       </li>
-                      <li>
+                      <li *ngIf="rol === 'admin'">
                         <a class="dropdown-item" [routerLink]="['/cambio/gestion']">Gestión de cambios</a>
                       </li>
                     </ul>
@@ -49,35 +49,34 @@
                       <li>
                         <a class="dropdown-item" [routerLink]="['empleados']">Listado de empleados</a>
                       </li>
-                      <li>
+                      <li *ngIf="rol === 'admin'">
                         <a class="dropdown-item" [routerLink]="['/nuevo/empleado']">Nuevo empleado</a>
                       </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
-                </li>
 
-                <!--<li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/calendario']" routerLinkActive="active">Calendario</a>
+                <!-- autenticacion -->
+                <li class="nav-item ms-3">
+                  @if (!isLoggedIn()) {
+                  <div class="d-flex gap-2">
+                    <a class="btn btn-outline-light btn-sm px-3" [routerLink]="['/login']">
+                      <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                      </a>
+                      <!--  <a class="btn btn-primary btn-sm px-3" [routerLink]="['/registro']">
+                            <i class="bi bi-person-plus me-1"></i> Registrarse
+                            </a>-->
+                  </div>
+                  } @else {
+                    <div class="d-flex align-items-center gap-3">
+                      <span class="text-light small d-none d-md-inline">
+                      <i class="bi bi-person-circle me-1"></i> {{rol}}
+                      </span>
+                      <button class="btn btn-outline-light btn-sm" (click)="logout()">
+                      <i class="bi bi-box-arrow-right"></i> Salir
+                      </button>
+                  </div>
+                  }
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/turnos']" routerLinkActive="active">Config. Turnos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/cambio']" routerLinkActive="active">Solicitud Cambio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/cambio/gestion']" routerLinkActive="active">Gestión de Cambios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" [routerLink]="['empleados']" routerLinkActive="active">Empleados</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/nuevo/empleado']" routerLinkActive="active">Nuevo</a>
-                </li>-->
-
-
 
             </ul>
         </div>

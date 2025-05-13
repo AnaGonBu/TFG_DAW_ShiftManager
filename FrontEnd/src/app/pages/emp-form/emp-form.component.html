@@ -20,6 +20,11 @@
         </div>
 
         <div class="mt-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="text" id="password" class="form-control" formControlName="password" placeholder="contraseña123">
+        </div>
+
+        <div class="mt-3">
             <label for="imagen" class="form-label">Imagen de perfil</label>
             <input type="text" id="imagen" class="form-control" formControlName="imagen" placeholder="URL de imagen">
         </div>
@@ -43,14 +48,11 @@
         <div class="mt-3">
             <label for="situacion" class="form-label">Situación administrativa</label>
             <select id="situacion" class="form-control" formControlName="situacion">
-                <option value="alta" selected>Alta</option>
-                <option value="baja_medica">Baja Médica</option>
-                <option value="baja_administrativa">Baja Administrativa</option>
-                <option value="licencia">Licencia</option>
+                <option value="Alta" selected>Alta</option>
+                <option value="Baja_medica">Baja Médica</option>
+                <option value="Baja_administrativa">Baja Administrativa</option>
+                <option value="Licencia">Licencia</option>
             </select>
-            <div *ngIf="empForm.get('idGrupo')?.invalid && empForm.get('idGrupo')?.touched" class="text-danger">
-                Debes seleccionar un grupo.
-              </div>
         </div>
 
         <div class="mt-4">
@@ -72,6 +74,17 @@
                 <option value="6">Grupo 6</option>
                 <option value="7">Grupo 7</option>
             </select>
+            <div *ngIf="empForm.get('idGrupo')?.invalid && empForm.get('idGrupo')?.touched" class="text-danger">
+                Debes seleccionar un grupo.
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <label for="rol" class="form-label">Rol</label>
+            <select id="rol" class="form-control" formControlName="rol">
+                <option value="user" selected>User</option>
+                <option value="admin">Admin</option>
+            </select>
         </div>
         </div>
         </div>
@@ -80,5 +93,6 @@
             <a [routerLink]="['/empleados']" class="btn btn-dark">Volver</a>
         </div>
 
+        
     </form>
 </section>

@@ -1,38 +1,39 @@
-<form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="container mt-5">
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+  <div class="card p-4 shadow" style="min-width: 320px; max-width: 400px; width: 100%;">
+    <h3 class="text-center mb-4">Iniciar Sesión</h3>
 
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-  
-        <h3 class="text-center mb-4">Iniciar sesión</h3>
-
-        <div class="mb-3">
-          <label for="email" class="form-label">Correo electrónico</label>
-          <input
-            type="email"
-            id="email"
-            class="form-control"
-            formControlName="email"
-            placeholder="usuario@empresa.com"
-          />
-        </div>
-  
-        <div class="mb-3">
-          <label for="password" class="form-label">Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            class="form-control"
-            formControlName="password"
-            placeholder="********"
-          />
-        </div>
-  
-        <button type="submit" class="btn btn-dark w-100" [disabled]="loginForm.invalid">
-          Iniciar sesión
-        </button>
-  
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="usuario@correo.com">
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+          <div class="text-danger mt-1 small">Por favor, introduce un email válido</div>
+        }
       </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña:</label>
+        <input type="password" id="password" formControlName="password" class="form-control" placeholder="********">
+        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+          <div class="text-danger mt-1 small">La contraseña es requerida</div>
+        }
+      </div>
+
+      @if (errorMessage) {
+        <div class="text-danger text-center mt-2">{{ errorMessage }}</div>
+      }
+
+      <button type="submit" class="btn btn-dark w-100 mt-3" [disabled]="!loginForm.valid">Iniciar Sesión</button>
+    </form>
+
+    <div class="mt-4 text-center small text-muted">
+      <p><strong>Testing</strong></p>
+      <p>
+        <strong>Admin:</strong><br> admin&#64;admin.com <br> admin
+      </p>
+      <p>
+        <strong>User:</strong><br> juan.g1&#64;empresa.com <br> admin
+      </p>
     </div>
-  
-  </form>
-  
+  </div>
+</div>

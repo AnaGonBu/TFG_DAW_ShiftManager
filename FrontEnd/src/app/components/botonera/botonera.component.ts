@@ -3,26 +3,36 @@ import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CambiosService } from '../../services/cambios.service';
 import { EmpleadoService } from '../../services/empleado.service';
+import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-botonera',
   standalone:true,
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './botonera.component.html',
   styleUrl: './botonera.component.css'
 })
 export class BotoneraComponent {
 
   empService = inject(EmpleadoService);
-  cambioService = inject(CambiosService)
+  cambioService = inject(CambiosService);
+  authService = inject(AuthService);
   router = inject(Router);
+
+  rol: string = '';
 
   @Input() estadoCambio!: string;
   @Input() idCambio!: number; 
   @Input() idEmp: number = 0;
   @Input() parent: string = "";
   @Input() estado!: boolean;
+
+  constructor() {
+    const userRole = this.authService.getUserRole();
+    this.rol = userRole ? userRole : '';
+  }
 
 
   async cambiarEstado() {
