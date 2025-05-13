@@ -86,13 +86,14 @@ export class CalendarioComponent implements OnInit {
         </div>
       `;
     
-      // Cargar empleados del grupo
+      // Cargar empleados del grupo, solo activos
       this.empleadoService.getByGrupo(idGrupo).then(empleados => {
+        const empleadosActivos = empleados.filter((e: Empleado) => e.estado === true);
         const contenedor = document.getElementById(empleadosDivId);
         if (contenedor) {
-          contenedor.innerHTML = empleados.length > 0
-            ? empleados.map((e: Empleado) => `<div>• ${e.nombre} ${e.apellidos}</div>`).join('')
-            : '<div class="text-muted">No hay empleados asignados</div>';
+          contenedor.innerHTML = empleadosActivos.length > 0
+            ? empleadosActivos.map((e: Empleado) => `<div>• ${e.nombre} ${e.apellidos}</div>`).join('')
+            : '<div class="text-muted">No hay empleados activos asignados</div>';
         }
       }).catch(() => {
         const contenedor = document.getElementById(empleadosDivId);
@@ -100,6 +101,7 @@ export class CalendarioComponent implements OnInit {
           contenedor.innerHTML = '<div class="text-danger">Error al cargar empleados</div>';
         }
       });
+
     
       // Cargar cambios solo si hay alguno ese día
       Promise.all([
