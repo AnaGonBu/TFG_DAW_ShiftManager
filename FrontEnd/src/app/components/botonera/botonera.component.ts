@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-botonera',
   standalone:true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink],
   templateUrl: './botonera.component.html',
   styleUrl: './botonera.component.css'
 })
