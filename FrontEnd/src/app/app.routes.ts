@@ -9,7 +9,7 @@ import { roleGuard } from './guards/role.guard';
 export const routes: Routes = [
 
     //rutas públicas
-    { path: "", pathMatch: "full", redirectTo: "calendario"},
+    { path: "", pathMatch: "full", redirectTo: "login"},
     { path: 'calendario', component: CalendarioComponent },
     { path: 'calendario',loadComponent: () => import( './pages/calendario/calendario.component').then( m => m.CalendarioComponent )},
     { path: 'empleados/grupo/:idGrupo',loadComponent: () => import('./pages/emp-list/emp-list.component').then(m => m.EmpListComponent)},
